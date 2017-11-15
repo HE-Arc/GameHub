@@ -14,7 +14,7 @@ class GamesController extends Controller
      */
     public function index()
     {
-      //
+        //
     }
 
     /**
@@ -30,7 +30,8 @@ class GamesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -41,7 +42,8 @@ class GamesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Games  $games
+     * @param \App\Games $games
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Games $games)
@@ -52,7 +54,8 @@ class GamesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Games  $games
+     * @param \App\Games $games
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Games $games)
@@ -63,8 +66,9 @@ class GamesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Games  $games
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Games               $games
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Games $games)
@@ -75,7 +79,8 @@ class GamesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Games  $games
+     * @param \App\Games $games
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Games $games)
