@@ -30,7 +30,8 @@ class UserGamesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -41,7 +42,8 @@ class UserGamesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\UserGames  $userGames
+     * @param \App\UserGames $userGames
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(UserGames $userGames)
@@ -52,7 +54,8 @@ class UserGamesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\UserGames  $userGames
+     * @param \App\UserGames $userGames
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(UserGames $userGames)
@@ -63,8 +66,9 @@ class UserGamesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\UserGames  $userGames
+     * @param \Illuminate\Http\Request $request
+     * @param \App\UserGames           $userGames
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, UserGames $userGames)
@@ -75,7 +79,8 @@ class UserGamesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\UserGames  $userGames
+     * @param \App\UserGames $userGames
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(UserGames $userGames)
