@@ -13,5 +13,5 @@ Un utilisateur pour se créer un compte où il pourra marquer les jeux auquels i
  
 
  .. [#pt] <thibaut.piquerez@he-arc.ch>
- .. [#jdc] <kilian.castella@he-arc.ch>
- .. [#mp] <laurent.gander@he-arc.ch>
+ .. [#ck] <kilian.castella@he-arc.ch>
+ .. [#gl] <laurent.gander@he-arc.ch>
