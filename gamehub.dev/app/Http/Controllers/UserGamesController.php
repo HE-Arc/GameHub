@@ -14,7 +14,9 @@ class UserGamesController extends Controller
      */
     public function index()
     {
-        //
+        $userGames = UserGames::all();
+
+        return view('usergames.index', ['usergames' => $userGames]);
     }
 
     /**
@@ -48,7 +50,6 @@ class UserGamesController extends Controller
      */
     public function show(UserGames $userGames)
     {
-        //
     }
 
     /**
