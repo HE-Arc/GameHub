@@ -17,8 +17,8 @@ class UserGamesController extends Controller
 
         //$usergames = UserGames::orderBy('game_id', 'asc')->paginate(9);
         $usergames = UserGames::all();
-        return view('usergames.index',['usergames' => $usergames] );
 
+        return view('usergames.index', ['usergames' => $usergames]);
     }
 
     /**
