@@ -14,8 +14,9 @@ class UserGamesController extends Controller
      */
     public function index()
     {
-        $userGames = UserGames::all();
-        return view('usergames.index',['usergames' => $userGames] );
+        //$usergames = UserGames::orderBy('game_id', 'asc')->paginate(9);
+        $usergames = UserGames::all();
+        return view('usergames.index',['usergames' => $usergames] );
     }
 
     /**
