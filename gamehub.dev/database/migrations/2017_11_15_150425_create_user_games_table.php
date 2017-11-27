@@ -15,14 +15,16 @@ class CreateUserGamesTable extends Migration
     {
         Schema::create('user_games', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->integer('game_id');
+            $table->integer('user_id')->unsigned();
+            $table->integer('game_id')->unsigned();
             $table->boolean('played');
             $table->integer('grades');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('games_id')->references('id')->on('games');
             $table->timestamps();
         });
+		Schema::table('user_games', function(Blueprint $table) {
+			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');;
+			$table->foreign('game_id')->references('steam_id')->on('games')->onDelete('cascade');;
+		});
     }
 
     /**
