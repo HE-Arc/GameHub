@@ -18,7 +18,7 @@ class CreateCommentsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->integer('game_id')->unsigned();
             $table->string('title');
-            $table->string('content');
+            $table->text('content');
             $table->timestamps();
         });
 		Schema::table('comments', function(Blueprint $table) {

@@ -22,4 +22,8 @@ Route::resource('usergames', 'UserGamesController');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('comments/{steamId}', 'CommentsController@index');
+Route::post('comments', 'CommentsController@store');
+Route::post('comments/{commentId}/', 'CommentsController@update');
+
 Auth::routes();
