@@ -21,10 +21,10 @@ class CreateUserGamesTable extends Migration
             $table->integer('grades');
             $table->timestamps();
         });
-		Schema::table('user_games', function(Blueprint $table) {
-			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-			$table->foreign('game_id')->references('steam_id')->on('games')->onDelete('cascade');
-		});
+        Schema::table('user_games', function (Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('game_id')->references('steam_id')->on('games')->onDelete('cascade');
+        });
     }
 
     /**
