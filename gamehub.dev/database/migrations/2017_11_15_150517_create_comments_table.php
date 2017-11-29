@@ -21,10 +21,10 @@ class CreateCommentsTable extends Migration
             $table->text('content');
             $table->timestamps();
         });
-		Schema::table('comments', function(Blueprint $table) {
-			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        Schema::table('comments', function (Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('game_id')->references('steam_id')->on('games')->onDelete('cascade');
-		});
+        });
     }
 
     /**

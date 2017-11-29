@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Comments;
-use App\User;
 use App\CommentVotes;
+use App\User;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -17,7 +18,7 @@ class CommentsController extends Controller
      */
     public function index($gameId)
     {
-        $comments = Comments::where('game_id',$gameId)->get();
+        $comments = Comments::where('game_id', $gameId)->get();
         $commentsData = [];
         foreach ($comments as $key) {
             $user = User::find($key->user_id);
@@ -27,25 +28,26 @@ class CommentsController extends Controller
             $vote = 0;
             $voteStatus = 0;
             $spam = 0;
-            if(Auth::user()){
-               $voteByUser = CommentVotes::where('comment_id',$key->id)->where('user_id',Auth::user()->id)->first();
-               if($voteByUser){
-                   $userVote = 1;
-                   $voteStatus = $voteByUser->vote;
-               }
+            if (Auth::user()) {
+                $voteByUser = CommentVotes::where('comment_id', $key->id)->where('user_id', Auth::user()->id)->first();
+                if ($voteByUser) {
+                    $userVote = 1;
+                    $voteStatus = $voteByUser->vote;
+                }
             }
-            array_push($commentsData,[
-                   "name" => $name,
-                   "commentid" => $key->id,
-                   "title" => $key->title,
-                   "comment" => $key->content,
-                   "votes" => $key->votes,
-                   "votedByUser" => $userVote,
-                   "userVoteStatus" => $voteStatus,
-                   "date" => $key->created_at->toDateTimeString()
+            array_push($commentsData, [
+                   'name'           => $name,
+                   'commentid'      => $key->id,
+                   'title'          => $key->title,
+                   'comment'        => $key->content,
+                   'votes'          => $key->votes,
+                   'votedByUser'    => $userVote,
+                   'userVoteStatus' => $voteStatus,
+                   'date'           => $key->created_at->toDateTimeString(),
                 ]);
         }
         $collection = collect($commentsData);
+
         return $collection->sortBy('votes');
     }
 
@@ -69,17 +71,16 @@ class CommentsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'title' => 'required',
+            'title'   => 'required',
             'comment' => 'required',
             'game_id' => 'filled',
             'user_id' => 'required',
         ]);
         $comment = Comment::create($request->all());
- 
-       if($comment)
- 
-           return [ "status" => "true","commentId" => $comment->id ];
- 
+
+        if ($comment) {
+            return ['status' => 'true', 'commentId' => $comment->id];
+        }
     }
 
     /**
@@ -117,17 +118,17 @@ class CommentsController extends Controller
     public function update(Request $request, $commentID)
     {
         $this->validate($request, [
-            'vote' => 'required',
+            'vote'     => 'required',
             'users_id' => 'required',
             ]);
         $comments = Comment::find($commentId);
         $data = [
-            "comment_id" => $commentId,
-            'vote' => $request->vote,
-            'user_id' => $request->users_id,
+            'comment_id' => $commentId,
+            'vote'       => $request->vote,
+            'user_id'    => $request->users_id,
         ];
- 
-        if($request->vote == "up"){
+
+        if ($request->vote == 'up') {
             $comment = $comments->first();
             $vote = $comment->votes;
             $vote++;
@@ -135,16 +136,16 @@ class CommentsController extends Controller
             $comments->save();
         }
 
-        if($request->vote == "down"){
+        if ($request->vote == 'down') {
             $comment = $comments->first();
             $vote = $comment->votes;
             $vote--;
             $comments->votes = $vote;
             $comments->save();
         }
-        if(CommentVote::create($data))
-            return "true";
-        
+        if (CommentVote::create($data)) {
+            return 'true';
+        }
     }
 
     /**
