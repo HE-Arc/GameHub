@@ -10,8 +10,8 @@
     <link rel="shortcut icon" href="{{ asset('img/logo2.png') }}" />
 	<title>GameHub</title>
 
-	<link href="{{ url('css/bootstrap.min.css') }}" rel="stylesheet">
-	<link href="{{ url('css/bootstrap-theme.min.css') }}" rel="stylesheet">
+
+	<link href="{{ url('css/app.css') }}" rel="stylesheet">
 	<link href="{{ url('css/style.css') }}" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
 
@@ -78,8 +78,8 @@
 	</div>
 </div>
 
-<script src="js/jquery-3.2.1.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function () {
