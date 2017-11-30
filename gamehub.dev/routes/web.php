@@ -13,7 +13,7 @@
 
 Auth::routes();
 
-Route::get('/infogame/{steam_id}', 'GameInfoControler@index')->name('route.infogame');;
+Route::get('/infogame/{steam_id}', 'GameInfoControler@index')->name('route.infogame');
 Route::get('/','StartPageControler@index');
 
 Route::get('/usergames', 'UserGamesController@index');
