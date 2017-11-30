@@ -10,9 +10,9 @@
     <link rel="shortcut icon" href="{{ asset('img/logo2.png') }}" />
 	<title>GameHub</title>
 
-	<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-	<link href="{{ asset('css/bootstrap-theme.min.css') }}" rel="stylesheet">
-	<link href="{{ asset('css/style.css') }}" rel="stylesheet">
+	<link href="{{ url('css/bootstrap.min.css') }}" rel="stylesheet">
+	<link href="{{ url('css/bootstrap-theme.min.css') }}" rel="stylesheet">
+	<link href="{{ url('css/style.css') }}" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
 
 
