@@ -12,5 +12,19 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UsersTableSeeder::class);
+        DB::table('games')->insert([
+            'steam_id' => 1,
+            'name' => 'Mon jeu',
+        ]);
+
+        DB::table('games')->insert([
+            'steam_id' => 2,
+            'name' => 'Mon jeu 2',
+        ]);
+
+        DB::table('games')->insert([
+            'steam_id' => 3,
+            'name' => 'Mon jeu 3',
+        ]);
     }
 }

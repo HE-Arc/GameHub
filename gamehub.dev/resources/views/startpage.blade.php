@@ -4,6 +4,6 @@
 
 <h1>Best rating games</h1>
  
-@include('layouts.layouttiled')
+@include('layouts.layouttiled', ['games' => $games])
 
 @endsection

@@ -1,15 +1,19 @@
 
 <div class="col-md-12 col-centered">
 	<?php
-        for ($i = 0; $i < 100; $i++) {
+       foreach ($games as $game) 
+       {
+       		$url = "/infogame/".$game->steam_id;
             ?>
 	<div class="col-md-3">
 		<div class="jumbotron col-md-12">
-		  <h2>Game <?php echo $i; ?></h2>
-		  <p>Description</p>
+		  <h2><?php echo $game->name; ?></h2>
+		  <a href= <?php echo route('route.infogame', $game->steam_id) ?> id="info" >Info</a>
 		</div>
 	</div>
 	<?php
         }
     ?>
 </div>
+
+
