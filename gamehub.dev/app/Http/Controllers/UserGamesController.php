@@ -90,4 +90,10 @@ class UserGamesController extends Controller
     {
         //
     }
+
+
+    public function insertGame($steam_id)
+    {
+            
+    }
 }
