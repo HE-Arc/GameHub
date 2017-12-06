@@ -1,6 +1,12 @@
 :root {
   --bg-color: #1976D2;
   --bg-title-color: #4FC3F7;
+  
+}
+
+.thumbnail #pocket{
+    height:300px;
+    width:200px;
 }
 
 @font-face {
