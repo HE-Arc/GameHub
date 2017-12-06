@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Comments;
-use App\CommentVotes;
+use App\Comment;
 use App\User;
 use Auth;
 use Illuminate\Http\Request;
@@ -18,7 +17,8 @@ class CommentsController extends Controller
      */
     public function index($gameId)
     {
-        $comments = Comments::where('game_id', $gameId)->get();
+        $comments = Comment::with('votes')->where('game_id', $gameId)->get();
+
         $commentsData = [];
         foreach ($comments as $key) {
             $user = User::find($key->user_id);
@@ -27,28 +27,32 @@ class CommentsController extends Controller
             $userVote = 0;
             $vote = 0;
             $voteStatus = 0;
-            $spam = 0;
-            if (Auth::user()) {
-                $voteByUser = CommentVotes::where('comment_id', $key->id)->where('user_id', Auth::user()->id)->first();
+            $point=0;
+            foreach ($key->votes as $note) {
+                $point =  $point + $note->pivot->note;
+            }
+            /*if (Auth::user()) {
+                $voteByUser = Comment::where('comment_id', $key->id)->where('user_id', Auth::user()->id)->first();
                 if ($voteByUser) {
                     $userVote = 1;
                     $voteStatus = $voteByUser->vote;
                 }
-            }
+            }*/
             array_push($commentsData, [
                    'name'           => $name,
                    'commentid'      => $key->id,
                    'title'          => $key->title,
-                   'comment'        => $key->content,
-                   'votes'          => $key->votes,
-                   'votedByUser'    => $userVote,
-                   'userVoteStatus' => $voteStatus,
+                   'content'        => $key->content,
+                   'votes'          => $point,
+                   //'votedByUser'    => $userVote,
+                   //'userVoteStatus' => $voteStatus,
                    'date'           => $key->created_at->toDateTimeString(),
                 ]);
         }
         $collection = collect($commentsData);
 
-        return $collection->sortBy('votes');
+        $sortedComments =$collection->sortBy('votes');
+        return view('comments.comment', ['comments' => $sortedComments]);
     }
 
     /**
@@ -90,7 +94,7 @@ class CommentsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(Comments $comments)
+    public function show(Comment $comments)
     {
         //
     }
@@ -102,7 +106,7 @@ class CommentsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(Comments $comments)
+    public function edit(Comment $comments)
     {
         //
     }
@@ -142,10 +146,10 @@ class CommentsController extends Controller
             $vote--;
             $comments->votes = $vote;
             $comments->save();
-        }
+        }/*
         if (CommentVote::create($data)) {
             return 'true';
-        }
+        }*/
     }
 
     /**
@@ -155,7 +159,7 @@ class CommentsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Comments $comments)
+    public function destroy(Comment $comments)
     {
         //
     }

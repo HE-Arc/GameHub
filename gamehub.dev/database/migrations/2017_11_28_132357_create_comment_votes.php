@@ -14,8 +14,8 @@ class CreateCommentVotes extends Migration
     public function up()
     {
         Schema::create('comment_votes', function (Blueprint $table) {
-            $table->integer('comment_id')->unsigned();
-            $table->integer('user_id')->unsigned();
+            $table->integer('comment_id')->unsigned()->index();
+            $table->integer('user_id')->unsigned()->index();
             $table->integer('note')->unsigned();
         });
         Schema::table('comment_votes', function (Blueprint $table) {
@@ -23,6 +23,7 @@ class CreateCommentVotes extends Migration
             $table->foreign('comment_id')->references('id')->on('comments')->onDelete('cascade');
         });
     }
+
 
     /**
      * Reverse the migrations.
