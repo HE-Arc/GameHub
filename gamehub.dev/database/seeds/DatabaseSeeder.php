@@ -14,17 +14,23 @@ class DatabaseSeeder extends Seeder
         // $this->call(UsersTableSeeder::class);
         DB::table('games')->insert([
             'steam_id' => 1,
-            'name'     => 'Mon jeu',
+            'name'     => "Assassin's Creed III",
+            'average_grade' => 3,
+            'picture' => 'Assassin_s_Creed_III.jpg',
         ]);
 
         DB::table('games')->insert([
             'steam_id' => 2,
-            'name'     => 'Mon jeu 2',
+            'name'     => 'Battlefield 4',
+            'average_grade' => 4,
+            'picture' => 'battlefield-4.jpg',
         ]);
 
         DB::table('games')->insert([
             'steam_id' => 3,
-            'name'     => 'Mon jeu 3',
+            'name'     => 'Kerbal Space Program',
+            'average_grade' => 5,
+            'picture' => 'Kerbal_Space_Program.jpg',
         ]);
     }
 }

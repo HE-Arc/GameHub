@@ -16,6 +16,8 @@ class CreateGamesTable extends Migration
         Schema::create('games', function (Blueprint $table) {
             $table->integer('steam_id')->unsigned()->primary();
             $table->string('name');
+            $table->integer('average_grade')->unsigned();
+            $table->string('picture');
             $table->timestamps();
         });
     }
