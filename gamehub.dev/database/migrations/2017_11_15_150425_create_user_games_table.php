@@ -13,18 +13,22 @@ class CreateUserGamesTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_games', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id')->unsigned();
-            $table->integer('game_id')->unsigned();
-            $table->boolean('played');
+        Schema::create('user_game', function (Blueprint $table) {
+            // //$table->increments('id');
+            // $table->integer('user_id')->unsigned()->primary();
+            // $table->integer('steam_id')->unsigned()->primary();
+            // $table->boolean('played');
+            // $table->integer('grades');
+            // $table->timestamps();
+            $table->integer('user_id');
+            $table->integer('steam_id');
             $table->integer('grades');
-            $table->timestamps();
+            $table->primary(['user_id', 'steam_id']);
         });
-        Schema::table('user_games', function (Blueprint $table) {
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('game_id')->references('steam_id')->on('games')->onDelete('cascade');
-        });
+        // Schema::table('user_games', function (Blueprint $table) {
+        //     $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        //     $table->foreign('steam_id')->references('steam_id')->on('games')->onDelete('cascade');
+        // });
     }
 
     /**
@@ -34,6 +38,6 @@ class CreateUserGamesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_games');
+        Schema::dropIfExists('user_game');
     }
 }

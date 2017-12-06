@@ -1,13 +1,6 @@
 @extends('layouts.mainlayout')
 
 @section('content')
-<ul>
-	@foreach ($usergames as $usergame)
-		<li>
-			<a href="{{route('usergames.show', $usergame)}}">
-				{{$usergame->game_id}}
-			</a>
-		</li>
-	@endforeach
-</ul>
+<h1>My Games</h1>
+@include('layouts.layouttiled', ['games' => $usergames])
 @endsection

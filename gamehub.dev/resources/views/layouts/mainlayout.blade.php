@@ -54,9 +54,10 @@
             @guest
                 <li><a href="{{ route('login') }}">Login</a></li>
                 <li><a href="{{ route('register') }}">Register</a></li>
-								<li><a href="{{ route('usergames.index') }}">Games</a></li>
+								<li><a href="{{ route('auth') }}">Steam</a></li>
             @else
                 <li><a href=""></a></li>
+								<li><a href="{{ route('usergames.index') }}">My Games</a></li>
                 <li>
                     <a  href="{{ route('logout') }}"
                         onclick="event.preventDefault();
