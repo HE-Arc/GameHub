@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
-    protected $fillable = ['title', 'content', 'game_id', 'users_id'];
+    protected $fillable = ['title', 'content', 'game_id', 'user_id'];
     protected $dates = ['created_at', 'updated_at'];
 
     public function votes()

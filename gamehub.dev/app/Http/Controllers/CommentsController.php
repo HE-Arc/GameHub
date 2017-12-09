@@ -76,7 +76,7 @@ class CommentsController extends Controller
     {
         $this->validate($request, [
             'title'   => 'required',
-            'comment' => 'required',
+            'content' => 'required',
             'game_id' => 'filled',
             'user_id' => 'required',
         ]);
