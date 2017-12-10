@@ -23,8 +23,8 @@
 				<div class="panel-heading">
 					<strong><?php echo  $comment['name'] ;?></strong> <span class="text-muted">a commenté le <?php echo  $comment['date'] ;?> à <?php echo  $comment['hour']; ?></span>
 				</div>
-				<div class="panel-body">
-					<ins><i><strong><?php echo  $comment['title'];?></strong></i></ins><br>
+				<div class="panel-body" >
+					<h5 id="comment_title"><?php echo  $comment['title'];?></h5><br>
 					<?php echo  $comment['content'] ;?>
 				</div>
 			</div>
