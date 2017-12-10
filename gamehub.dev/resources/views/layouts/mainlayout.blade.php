@@ -28,7 +28,7 @@
 	        <span class="icon-bar"></span>
 	        <span class="icon-bar"></span>
 	      </button>
-	      <a href="{{ url('/') }}" id="title">GameHub</a>
+	      <a href="{{ url('/') }}" id="siteTitle">GameHub</a>
 	    </div>
 
 	    <!-- Collect the nav links, forms, and other content for toggling -->
@@ -73,7 +73,7 @@
             @endguest
         </ul>
 	</nav>
-	<div id="content">
+	<div id="siteContent">
 		@yield('content')
 	</div>
 </div>

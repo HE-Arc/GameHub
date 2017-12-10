@@ -46,7 +46,8 @@ class CommentsController extends Controller
                    'votes'          => $point,
                    //'votedByUser'    => $userVote,
                    //'userVoteStatus' => $voteStatus,
-                   'date'           => $key->created_at->toDateTimeString(),
+                   'date'           => $key->created_at->format('m/d/Y'),
+                   'hour'           => $key->created_at->format('H:i'),
                 ]);
         }
         $collection = collect($commentsData);
