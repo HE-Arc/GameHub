@@ -14,7 +14,7 @@ class GamesUser extends Migration
     public function up()
     {
       Schema::create('games_user', function (Blueprint $table) {
-          $table->integer('steam_id');
+          $table->integer('games_id');
           $table->integer('user_id');
           $table->integer('grade');
           $table->boolean('playes');
