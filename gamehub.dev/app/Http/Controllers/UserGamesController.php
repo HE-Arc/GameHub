@@ -14,11 +14,19 @@ class UserGamesController extends Controller
      */
     public function index()
     {
+        //$userid = auth()->user()->id;
+        $games = auth()->user()->games()->get();
 
-        //$usergames = UserGames::orderBy('game_id', 'asc')->paginate(9);
-        $usergames = UserGames::all();
+        foreach ($games as $game) {
+          $tab = [];
+          $tab['games_id'] = $game;
+          $tab['grades'] = $game->withPivot('grade');
+          $tab['img'] = $game->picture;
+          $tab['grade'] = $game->withPivot('grade');
+        }
 
-        return view('usergames.index', ['usergames' => $usergames]);
+
+        return view('usergames.index', ['usergames' => $tab]);
     }
 
     /**
@@ -89,11 +97,5 @@ class UserGamesController extends Controller
     public function destroy(UserGames $userGames)
     {
         //
-    }
-
-
-    public function insertGame($steam_id)
-    {
-            
     }
 }

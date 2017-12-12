@@ -1,7 +1,7 @@
 <?php
 
 namespace App;
-use App\User;
+
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,6 +12,6 @@ class Games extends Model
 
     public function users()
     {
-      $this->belongsToMany(User::class)->withPivot('grades');
+      return $this->belongsToMany(User::class)->withPivot('grade');
     }
 }
