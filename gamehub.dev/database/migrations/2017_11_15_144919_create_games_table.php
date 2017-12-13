@@ -14,7 +14,7 @@ class CreateGamesTable extends Migration
     public function up()
     {
         Schema::create('games', function (Blueprint $table) {
-            $table->integer('steam_id')->unsigned()->primary();
+            $table->increments('id');
             $table->string('name');
             $table->integer('grade')->unsigned();
             $table->string('picture');

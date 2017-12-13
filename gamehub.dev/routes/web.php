@@ -16,12 +16,12 @@ Auth::routes();
 Route::get('/infogame/{steam_id}', 'GameInfoControler@index')->name('route.infogame');
 Route::get('/', 'StartPageControler@index');
 
-Route::get('/usergames', 'UserGamesController@index');
-Route::resource('usergames', 'UserGamesController');
+Route::get('/gamesuser', 'GamesUserController@index');
+Route::resource('gamesuser', 'GamesUserController');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/addgame/{steam_id}', 'UserGamesController@insertGame')->name('addGame');
+Route::get('/addgame/{steam_id}', 'GamesUserController@insertGame')->name('addGame');
 
 Route::get('comments/{steamId}', 'CommentsController@index');
 Route::post('comments', 'CommentsController@store');

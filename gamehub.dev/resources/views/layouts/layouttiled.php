@@ -2,16 +2,16 @@
 <div class="col-md-12 col-centered">
 	<?php
        foreach ($games as $game) {
-           $url = '/infogame/'.$game->steam_id; ?>
+           $url = '/infogame/'.$game->id; ?>
 	<div class="col-md-3">
 		<div class="thumbnail col-md-12">
 			<img id="pocket" src=<?php echo asset("img/pocket/$game->picture"); ?> >
 			<div class="caption">
 			  <p><?php echo $game->name; ?></p>
-			  <p> <?php for ($i=0; $i < $game->grade; $i++) { 
+			  <p> <?php for ($i=0; $i < $game->grade; $i++) {
 			  	?><img src=<?php echo asset('img/star.png'); ?>><?php } ?></p>
-			  <p><a class="btn btn-primary btn-lg" href= <?php echo route('route.infogame', $game->steam_id) ?> id="info" >Info</a>
-			  	
+			  <p><a class="btn btn-primary btn-lg" href= <?php echo route('route.infogame', $game->id) ?> id="info" >Info</a>
+
 			  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Add</button>
 
 			  </p>
@@ -37,11 +37,11 @@
 					</button>
 					<ul class="dropdown-menu col-lg-12">
 						<li>
-							<?php for ($j=0; $j < 6; $j++) { 
+							<?php for ($j=0; $j < 6; $j++) {
 								?>
 							<a onclick="setStarChoose(this,<?php echo $j+1 ?>);" value=<?php echo $j+1 ?>>
-								<?php for ($i=0; $i < $j; $i++) 
-								{ 
+								<?php for ($i=0; $i < $j; $i++)
+								{
 			  					?>
 			  					<img src=<?php echo asset('img/star.png'); ?>>
 			  					<?php } ?>
@@ -49,7 +49,7 @@
 			  				<?php } ?>
 
 			  			</li>
-						
+
 					</ul>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

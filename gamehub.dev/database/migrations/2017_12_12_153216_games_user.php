@@ -17,8 +17,8 @@ class GamesUser extends Migration
           $table->integer('games_id');
           $table->integer('user_id');
           $table->integer('grade');
-          $table->boolean('playes');
-          $table->primary(['steam_id', 'user_id']);
+          $table->boolean('played');
+          $table->primary(['games_id', 'user_id']);
       });
     }
 

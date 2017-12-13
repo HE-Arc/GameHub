@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\UserGames;
+use App\GamesUser;
 use Illuminate\Http\Request;
 
-class UserGamesController extends Controller
+class GamesUserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,18 +15,8 @@ class UserGamesController extends Controller
     public function index()
     {
         //$userid = auth()->user()->id;
-        $games = auth()->user()->games()->get();
-
-        foreach ($games as $game) {
-          $tab = [];
-          $tab['games_id'] = $game;
-          $tab['grades'] = $game->withPivot('grade');
-          $tab['img'] = $game->picture;
-          $tab['grade'] = $game->withPivot('grade');
-        }
-
-
-        return view('usergames.index', ['usergames' => $tab]);
+        $gamesuser = auth()->user()->games()->get();
+        return view('gamesuser.index', compact('gamesuser'));
     }
 
     /**
@@ -54,22 +44,22 @@ class UserGamesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\UserGames $userGames
+     * @param \App\GamesUser $GamesUser
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(UserGames $userGames)
+    public function show(GamesUser $gamesuser)
     {
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\UserGames $userGames
+     * @param \App\GamesUser $GamesUser
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(UserGames $userGames)
+    public function edit(GamesUser $gamesuser)
     {
         //
     }
@@ -78,11 +68,11 @@ class UserGamesController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \App\UserGames           $userGames
+     * @param \App\GamesUser           $GamesUser
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, UserGames $userGames)
+    public function update(Request $request, GamesUser $gamesuser)
     {
         //
     }
@@ -90,11 +80,11 @@ class UserGamesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\UserGames $userGames
+     * @param \App\GamesUser $GamesUser
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(UserGames $userGames)
+    public function destroy(GamesUser $gamesuser)
     {
         //
     }
