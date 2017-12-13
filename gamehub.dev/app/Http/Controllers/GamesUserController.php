@@ -16,6 +16,7 @@ class GamesUserController extends Controller
     {
         //$userid = auth()->user()->id;
         $gamesuser = auth()->user()->games()->get();
+
         return view('gamesuser.index', compact('gamesuser'));
     }
 
