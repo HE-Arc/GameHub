@@ -25,7 +25,7 @@ Route::get('/addgame/{steam_id}', 'GamesUserController@insertGame')->name('addGa
 
 Route::get('comments/{steamId}', 'CommentsController@index');
 Route::post('comments', 'CommentsController@store');
-Route::post('comments/{commentId}/', 'CommentsController@update');
+Route::post('comments/{comment}/', 'CommentsController@update');
 
 Route::get('auth/steam', 'Auth\AuthController@redirectToProvider')->name('auth');
 Route::get('auth/steam/callback', 'Auth\AuthController@handleProviderCallback');
