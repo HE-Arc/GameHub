@@ -27,9 +27,9 @@ class CommentsController extends Controller
             $userVote = 0;
             $vote = 0;
             $voteStatus = 0;
-            $point=0;
+            $point = 0;
             foreach ($key->votes as $note) {
-                $point =  $point + $note->pivot->note;
+                $point = $point + $note->pivot->note;
             }
             /*if (Auth::user()) {
                 $voteByUser = Comment::where('comment_id', $key->id)->where('user_id', Auth::user()->id)->first();
@@ -52,7 +52,8 @@ class CommentsController extends Controller
         }
         $collection = collect($commentsData);
 
-        $sortedComments =$collection->sortBy('votes');
+        $sortedComments = $collection->sortBy('votes');
+
         return view('comments.comment', ['comments' => $sortedComments]);
     }
 

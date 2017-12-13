@@ -2,7 +2,6 @@
 
 namespace App;
 
-
 use Illuminate\Database\Eloquent\Model;
 
 class Games extends Model
@@ -12,6 +11,6 @@ class Games extends Model
 
     public function users()
     {
-      return $this->belongsToMany(User::class)->withPivot('grade', 'played');
+        return $this->belongsToMany(User::class)->withPivot('grade', 'played');
     }
 }

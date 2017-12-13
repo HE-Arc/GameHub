@@ -8,8 +8,9 @@
 			<img id="pocket" src=<?php echo asset("img/pocket/$game->picture"); ?> >
 			<div class="caption">
 			  <p><?php echo $game->name; ?></p>
-			  <p> <?php for ($i=0; $i < $game->grade; $i++) {
-			  	?><img src=<?php echo asset('img/star.png'); ?>><?php } ?></p>
+			  <p> <?php for ($i = 0; $i < $game->grade; $i++) {
+               ?><img src=<?php echo asset('img/star.png'); ?>><?php
+           } ?></p>
 			  <p><a class="btn btn-primary btn-lg" href= <?php echo route('route.infogame', $game->id) ?> id="info" >Info</a>
 
 			  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Add</button>
@@ -37,16 +38,17 @@
 					</button>
 					<ul class="dropdown-menu col-lg-12">
 						<li>
-							<?php for ($j=0; $j < 6; $j++) {
-								?>
-							<a onclick="setStarChoose(this,<?php echo $j+1 ?>);" value=<?php echo $j+1 ?>>
-								<?php for ($i=0; $i < $j; $i++)
-								{
-			  					?>
+							<?php for ($j = 0; $j < 6; $j++) {
+        ?>
+							<a onclick="setStarChoose(this,<?php echo $j + 1 ?>);" value=<?php echo $j + 1 ?>>
+								<?php for ($i = 0; $i < $j; $i++) {
+            ?>
 			  					<img src=<?php echo asset('img/star.png'); ?>>
-			  					<?php } ?>
+			  					<?php
+        } ?>
 			  				</a>
-			  				<?php } ?>
+			  				<?php
+    } ?>
 
 			  			</li>
 
