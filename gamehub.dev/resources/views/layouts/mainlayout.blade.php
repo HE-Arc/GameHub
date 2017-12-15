@@ -56,7 +56,7 @@
             @guest
                 <li><a href="{{ route('login') }}">Login</a></li>
                 <li><a href="{{ route('register') }}">Register</a></li>
-								<li><a href="{{ route('auth') }}">Steam</a></li>
+								<li><a href="{{ route('auth.steam') }}">Steam</a></li>
             @else
                 <li><a href=""></a></li>
 								<li><a href="{{ route('gamesuser.index') }}">My Games</a></li>

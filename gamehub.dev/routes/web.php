@@ -27,7 +27,9 @@ Route::get('comments/{steamId}', 'CommentsController@index');
 Route::post('comments', 'CommentsController@store');
 Route::post('comments/{commentId}/', 'CommentsController@update');
 
-Route::get('auth/steam', 'Auth\AuthController@redirectToProvider')->name('auth');
-Route::get('auth/steam/callback', 'Auth\AuthController@handleProviderCallback');
+Route::get('auth/steam', 'Auth\AuthController@redirectToSteam')->name('auth.steam');
+Route::get('auth/steam/handle', 'Auth\AuthController@handle')->name('auth.steam.handle');
+
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 Auth::routes();

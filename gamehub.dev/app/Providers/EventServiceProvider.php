@@ -15,9 +15,6 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         'App\Events\Event' => [
             'App\Listeners\EventListener',
-            \SocialiteProviders\Manager\SocialiteWasCalled::class => [
-        '\SocialiteProviders\Steam\SteamExtendSocialite@handle',
-                ],
           ],
     ];
 

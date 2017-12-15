@@ -2,30 +2,84 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\UsersSteam;
 use App\Http\Controllers\Controller;
-use Socialite;
+use Invisnik\LaravelSteamAuth\SteamAuth;
 
 class AuthController extends Controller
 {
-    /**
-     * Redirect the user to the Steam authentication page.
+  /**
+     * The SteamAuth instance.
      *
-     * @return Response
+     * @var SteamAuth
      */
-    public function redirectToProvider()
+    protected $steam;
+
+    /**
+     * The redirect URL.
+     *
+     * @var string
+     */
+    protected $redirectURL = '/home';
+
+    /**
+     * AuthController constructor.
+     *
+     * @param SteamAuth $steam
+     */
+    public function __construct(SteamAuth $steam)
     {
-        return Socialite::driver('steam')->redirect();
+        $this->steam = $steam;
     }
 
     /**
-     * Obtain the user information from GitHub.
+     * Redirect the user to the authentication page
      *
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function handleProviderCallback()
+    public function redirectToSteam()
     {
-        $user = Socialite::driver('steam')->user();
+        return $this->steam->redirect();
+    }
 
-        // $user->token;
+    /**
+     * Get user info and log in
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function handle()
+    {
+        if ($this->steam->validate()) {
+            $info = $this->steam->getUserInfo();
+            if (!is_null($info)) {
+                $user = $this->findOrNewUser($info);
+
+                Auth::login($user, true);
+
+                return redirect($this->redirectURL); // redirect to site
+            }
+        }
+        return $this->redirectToSteam();
+    }
+
+    /**
+     * Getting user by info or created if not exists
+     *
+     * @param $info
+     * @return UsersSteam
+     */
+    protected function findOrNewUser($info)
+    {
+        $user = UsersSteam::where('steamid', $info->steamID64)->first();
+
+        if (!is_null($user)) {
+            return $user;
+        }
+
+        return UsersSteam::create([
+            'username' => $info->personaname,
+            'avatar' => $info->avatarfull,
+            'steamid' => $info->steamID64
+        ]);
     }
 }
