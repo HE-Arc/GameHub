@@ -15,7 +15,7 @@
 	<link href="{{ secure_asset('css/style.css') }}" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
 
-	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ secure_asset('css/fontawesome-stars.css') }}">
 
 </head>
@@ -30,7 +30,7 @@
 	        <span class="icon-bar"></span>
 	        <span class="icon-bar"></span>
 	      </button>
-	      <a href="{{ url('/') }}" id="siteTitle">GameHub</a>
+	      <a href="{{ secure_asset('/') }}" id="siteTitle">GameHub</a>
 	    </div>
 
 	    <!-- Collect the nav links, forms, and other content for toggling -->
@@ -76,9 +76,8 @@
             @endguest
         </ul>
 	</nav>
-	<div id="siteContent">
+	<div id="content">
 		@yield('content')
-		@yield('scripts')
 	</div>
 </div>
 
@@ -86,7 +85,6 @@
 <script src="{{ secure_asset('js/app.js') }}"></script>
 <script src="{{ secure_asset('js/jquery.barrating.min.js') }}"></script>
 <script src="{{ secure_asset('js/ratingbarstar.js') }}"></script>
-<script type="text/javascript" src="{{ secure_asset('js/examples2.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function () {

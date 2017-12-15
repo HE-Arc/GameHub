@@ -33,6 +33,24 @@ class DatabaseSeeder extends Seeder
             'picture'  => 'Kerbal_Space_Program.jpg',
         ]);
 
+        DB::table('games')->insert([
+            'id'       => 4,
+            'name'     => 'Wolfenstein: The New Order',
+            'grade'    => 5,
+            'picture'  => 'Wolfenstein_The_New_Order.jpg',
+        ]);
+
+        DB::table('games')->insert([
+            'id'       => 5,
+            'name'     => 'Far Cry 3',
+            'grade'    => 4,
+            'picture'  => 'Far_Cry_3.jpg',
+        ]);
+
+        
+
+
+
         DB::table('users')->insert([
           'id'       => 1,
           'name'     => 'test',

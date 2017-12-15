@@ -13,4 +13,10 @@ class Games extends Model
     {
         return $this->belongsToMany(User::class)->withPivot('grade', 'played');
     }
+
+    public function bestGrades()
+    {
+    	return $this->all()->sortBy("grade");
+    }
+
 }
