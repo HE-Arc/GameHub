@@ -16,7 +16,6 @@ class Games extends Model
 
     public function bestGrades()
     {
-    	return $this->all()->sortBy("grade");
+        return $this->all()->sortBy('grade');
     }
-
 }
