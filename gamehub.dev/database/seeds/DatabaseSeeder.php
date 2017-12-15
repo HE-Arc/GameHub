@@ -47,10 +47,6 @@ class DatabaseSeeder extends Seeder
             'picture'  => 'Far_Cry_3.jpg',
         ]);
 
-        
-
-
-
         DB::table('users')->insert([
           'id'       => 1,
           'name'     => 'test',
