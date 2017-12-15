@@ -76,6 +76,7 @@
 	</nav>
 	<div id="siteContent">
 		@yield('content')
+		@yield('scripts')
 	</div>
 </div>
 

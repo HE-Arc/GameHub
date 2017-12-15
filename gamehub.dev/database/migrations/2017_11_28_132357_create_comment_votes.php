@@ -24,7 +24,6 @@ class CreateCommentVotes extends Migration
         });
     }
 
-
     /**
      * Reverse the migrations.
      *
