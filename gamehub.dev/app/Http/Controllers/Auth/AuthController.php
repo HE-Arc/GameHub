@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\UsersSteam;
 use App\Http\Controllers\Controller;
+use App\UsersSteam;
 use Invisnik\LaravelSteamAuth\SteamAuth;
 
 class AuthController extends Controller
 {
-  /**
+    /**
      * The SteamAuth instance.
      *
      * @var SteamAuth
@@ -33,7 +33,7 @@ class AuthController extends Controller
     }
 
     /**
-     * Redirect the user to the authentication page
+     * Redirect the user to the authentication page.
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
@@ -43,7 +43,7 @@ class AuthController extends Controller
     }
 
     /**
-     * Get user info and log in
+     * Get user info and log in.
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
@@ -59,13 +59,15 @@ class AuthController extends Controller
                 return redirect($this->redirectURL); // redirect to site
             }
         }
+
         return $this->redirectToSteam();
     }
 
     /**
-     * Getting user by info or created if not exists
+     * Getting user by info or created if not exists.
      *
      * @param $info
+     *
      * @return UsersSteam
      */
     protected function findOrNewUser($info)
@@ -78,8 +80,8 @@ class AuthController extends Controller
 
         return UsersSteam::create([
             'username' => $info->personaname,
-            'avatar' => $info->avatarfull,
-            'steamid' => $info->steamID64
+            'avatar'   => $info->avatarfull,
+            'steamid'  => $info->steamID64,
         ]);
     }
 }
