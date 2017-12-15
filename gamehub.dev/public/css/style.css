@@ -155,7 +155,9 @@ a.article, a.article:hover {
     background: var(--bg-title-color) !important;
     color: #fff !important;
 }
-
+span{
+    display: inline-block;
+}
 
 /* ---------------------------------------------------
     CONTENT STYLE

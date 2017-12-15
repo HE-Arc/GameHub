@@ -8,6 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="shortcut icon" href="{{ secure_asset('img/logo2.png') }}" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
 	<title>GameHub</title>
 
 
@@ -76,8 +77,9 @@
             @endguest
         </ul>
 	</nav>
-	<div id="content">
+	<div id="siteContent">
 		@yield('content')
+		@yield('scripts')
 	</div>
 </div>
 
