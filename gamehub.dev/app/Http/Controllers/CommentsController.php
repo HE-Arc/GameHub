@@ -54,7 +54,7 @@ class CommentsController extends Controller
 
         $sortedComments = $collection->sortBy('votes');
 
-        return view('comments.comment', ['comments' => $sortedComments,'game_id'=>$gameId]);
+        return view('comments.comment', ['comments' => $sortedComments, 'game_id'=>$gameId]);
     }
 
     /**
@@ -81,7 +81,7 @@ class CommentsController extends Controller
             'content' => 'required',
             'game_id' => 'filled',
         ]);
-        $comment = Comment::create(array_merge($request->all(),['user_id' => Auth::id()]));
+        $comment = Comment::create(array_merge($request->all(), ['user_id' => Auth::id()]));
 
         if ($comment) {
             return ['status' => 'true', 'commentId' => $comment->id];
@@ -121,14 +121,13 @@ class CommentsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
-    {   
-        if (Auth::check()){
-            $comment= Comment::find($request->input('comment_id'));
+    {
+        if (Auth::check()) {
+            $comment = Comment::find($request->input('comment_id'));
             $comment->votes()->attach(Auth::id(), ['note' =>  $request->input('note')]);
-            return "success";
-        }
-        else
-        {
+
+            return 'success';
+        } else {
             return "You're not logged in";
         }
     }

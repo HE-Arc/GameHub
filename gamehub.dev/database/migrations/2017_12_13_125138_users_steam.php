@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class UsersSteam extends Migration
 {
@@ -13,11 +13,11 @@ class UsersSteam extends Migration
      */
     public function up()
     {
-      Schema::create('users_steam', function (Blueprint $table) {
-          $table->increments('steamid');
-          $table->string('username');
-          $table->string('avatar');
-      });
+        Schema::create('users_steam', function (Blueprint $table) {
+            $table->increments('steamid');
+            $table->string('username');
+            $table->string('avatar');
+        });
     }
 
     /**
@@ -27,6 +27,6 @@ class UsersSteam extends Migration
      */
     public function down()
     {
-      Schema::dropIfExists('users_steam');
+        Schema::dropIfExists('users_steam');
     }
 }
