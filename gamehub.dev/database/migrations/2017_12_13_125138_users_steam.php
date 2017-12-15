@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGamesTable extends Migration
+class UsersSteam extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateGamesTable extends Migration
      */
     public function up()
     {
-        Schema::create('games', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->integer('grade')->unsigned();
-            $table->string('picture');
-            $table->timestamps();
+        Schema::create('users_steam', function (Blueprint $table) {
+            $table->increments('steamid');
+            $table->string('username');
+            $table->string('avatar');
         });
     }
 
@@ -29,6 +27,6 @@ class CreateGamesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('games');
+        Schema::dropIfExists('users_steam');
     }
 }

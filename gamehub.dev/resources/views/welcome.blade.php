@@ -74,6 +74,7 @@
                         <a href="{{ url('/startpage') }}">Page d'accueil</a>
                         <a href="{{ route('login') }}">Login</a>
                         <a href="{{ route('register') }}">Register</a>
+                        <a href="{{ route('auth') }}">Steam</a>
                     @endauth
                 </div>
             @endif

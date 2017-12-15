@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Comments;
-use App\CommentVotes;
+use App\Comment;
 use App\User;
 use Auth;
 use Illuminate\Http\Request;
@@ -18,7 +17,8 @@ class CommentsController extends Controller
      */
     public function index($gameId)
     {
-        $comments = Comments::where('game_id', $gameId)->get();
+        $comments = Comment::with('votes')->where('game_id', $gameId)->get();
+
         $commentsData = [];
         foreach ($comments as $key) {
             $user = User::find($key->user_id);
@@ -27,28 +27,34 @@ class CommentsController extends Controller
             $userVote = 0;
             $vote = 0;
             $voteStatus = 0;
-            $spam = 0;
-            if (Auth::user()) {
-                $voteByUser = CommentVotes::where('comment_id', $key->id)->where('user_id', Auth::user()->id)->first();
+            $point = 0;
+            foreach ($key->votes as $note) {
+                $point = $point + $note->pivot->note;
+            }
+            /*if (Auth::user()) {
+                $voteByUser = Comment::where('comment_id', $key->id)->where('user_id', Auth::user()->id)->first();
                 if ($voteByUser) {
                     $userVote = 1;
                     $voteStatus = $voteByUser->vote;
                 }
-            }
+            }*/
             array_push($commentsData, [
                    'name'           => $name,
                    'commentid'      => $key->id,
                    'title'          => $key->title,
-                   'comment'        => $key->content,
-                   'votes'          => $key->votes,
-                   'votedByUser'    => $userVote,
-                   'userVoteStatus' => $voteStatus,
-                   'date'           => $key->created_at->toDateTimeString(),
+                   'content'        => $key->content,
+                   'votes'          => $point,
+                   //'votedByUser'    => $userVote,
+                   //'userVoteStatus' => $voteStatus,
+                   'date'           => $key->created_at->format('d/m/Y'),
+                   'hour'           => $key->created_at->format('H:i'),
                 ]);
         }
         $collection = collect($commentsData);
 
-        return $collection->sortBy('votes');
+        $sortedComments = $collection->sortBy('votes');
+
+        return view('comments.comment', ['comments' => $sortedComments, 'game_id'=>$gameId]);
     }
 
     /**
@@ -72,11 +78,10 @@ class CommentsController extends Controller
     {
         $this->validate($request, [
             'title'   => 'required',
-            'comment' => 'required',
+            'content' => 'required',
             'game_id' => 'filled',
-            'user_id' => 'required',
         ]);
-        $comment = Comment::create($request->all());
+        $comment = Comment::create(array_merge($request->all(), ['user_id' => Auth::id()]));
 
         if ($comment) {
             return ['status' => 'true', 'commentId' => $comment->id];
@@ -90,7 +95,7 @@ class CommentsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(Comments $comments)
+    public function show(Comment $comments)
     {
         //
     }
@@ -102,7 +107,7 @@ class CommentsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(Comments $comments)
+    public function edit(Comment $comments)
     {
         //
     }
@@ -115,36 +120,15 @@ class CommentsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $commentID)
+    public function update(Request $request)
     {
-        $this->validate($request, [
-            'vote'     => 'required',
-            'users_id' => 'required',
-            ]);
-        $comments = Comment::find($commentId);
-        $data = [
-            'comment_id' => $commentId,
-            'vote'       => $request->vote,
-            'user_id'    => $request->users_id,
-        ];
+        if (Auth::check()) {
+            $comment = Comment::find($request->input('comment_id'));
+            $comment->votes()->attach(Auth::id(), ['note' =>  $request->input('note')]);
 
-        if ($request->vote == 'up') {
-            $comment = $comments->first();
-            $vote = $comment->votes;
-            $vote++;
-            $comments->votes = $vote;
-            $comments->save();
-        }
-
-        if ($request->vote == 'down') {
-            $comment = $comments->first();
-            $vote = $comment->votes;
-            $vote--;
-            $comments->votes = $vote;
-            $comments->save();
-        }
-        if (CommentVote::create($data)) {
-            return 'true';
+            return 'success';
+        } else {
+            return "You're not logged in";
         }
     }
 
@@ -155,7 +139,7 @@ class CommentsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Comments $comments)
+    public function destroy(Comment $comments)
     {
         //
     }

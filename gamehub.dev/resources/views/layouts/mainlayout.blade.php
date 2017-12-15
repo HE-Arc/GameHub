@@ -30,7 +30,7 @@
 	        <span class="icon-bar"></span>
 	        <span class="icon-bar"></span>
 	      </button>
-	      <a href="{{ url('/') }}" id="title">GameHub</a>
+	      <a href="{{ url('/') }}" id="siteTitle">GameHub</a>
 	    </div>
 
 	    <!-- Collect the nav links, forms, and other content for toggling -->
@@ -58,9 +58,10 @@
             @guest
                 <li><a href="{{ route('login') }}">Login</a></li>
                 <li><a href="{{ route('register') }}">Register</a></li>
-								<li><a href="{{ route('usergames.index') }}">Games</a></li>
+								<li><a href="{{ route('auth.steam') }}">Steam</a></li>
             @else
                 <li><a href=""></a></li>
+								<li><a href="{{ route('gamesuser.index') }}">My Games</a></li>
                 <li>
                     <a  href="{{ route('logout') }}"
                         onclick="event.preventDefault();
@@ -75,8 +76,9 @@
             @endguest
         </ul>
 	</nav>
-	<div id="content">
+	<div id="siteContent">
 		@yield('content')
+		@yield('scripts')
 	</div>
 </div>
 

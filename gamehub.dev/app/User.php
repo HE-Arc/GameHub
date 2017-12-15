@@ -26,4 +26,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function games()
+    {
+        return $this->belongsToMany(Games::class)->withPivot('grade', 'played');
+    }
 }

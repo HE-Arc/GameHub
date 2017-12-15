@@ -16,7 +16,7 @@
 	font-style: normal;
 }
 
-#title{
+#siteTitle{
 	font-family: light-pixel-7, sans-serif; 
 	font-size: 40px;
 	color: var(--bg-title-color);
@@ -160,7 +160,7 @@ a.article, a.article:hover {
 /* ---------------------------------------------------
     CONTENT STYLE
 ----------------------------------------------------- */
-#content {
+#siteContent {
     width: calc(100% - 250px);
     padding: 30px;
     min-height: 100vh;
@@ -208,3 +208,8 @@ a.article, a.article:hover {
 	background: var(--bg-title-color);
 }
 
+#comment_title{
+    font-weight: bold;
+    text-decoration: underline;
+    font-style: italic;
+}
