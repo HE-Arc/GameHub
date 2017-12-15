@@ -7,14 +7,16 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="shortcut icon" href="{{ asset('img/logo2.png') }}" />
+    <link rel="shortcut icon" href="{{ secure_asset('img/logo2.png') }}" />
 	<title>GameHub</title>
 
 
-	<link href="{{ url('css/app.css') }}" rel="stylesheet">
-	<link href="{{ url('css/style.css') }}" rel="stylesheet">
+	<link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
+	<link href="{{ secure_asset('css/style.css') }}" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
 
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ secure_asset('css/fontawesome-stars.css') }}">
 
 </head>
 <body>
@@ -78,7 +80,11 @@
 	</div>
 </div>
 
-<script src="{{ asset('js/app.js') }}"></script>
+
+<script src="{{ secure_asset('js/app.js') }}"></script>
+<script src="{{ secure_asset('js/jquery.barrating.min.js') }}"></script>
+<script src="{{ secure_asset('js/ratingbarstar.js') }}"></script>
+<script type="text/javascript" src="{{ secure_asset('js/examples2.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function () {
@@ -94,5 +100,8 @@
             });
 
 </script>
+
+
+
 </body>
 </html>

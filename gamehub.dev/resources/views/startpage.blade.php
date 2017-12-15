@@ -3,7 +3,12 @@
 @section('content')
 
 <h1>Best rating games</h1>
- 
-@include('layouts.layouttiled', ['games' => $games])
+<?php  
+	$button = 'add';
+?>
 
-@endsection
+@include('layouts.layouttiled', ['button' => ['add']])
+@include('layouts.layoutaddgame',['wishlist' => true])
+
+
+@stop
