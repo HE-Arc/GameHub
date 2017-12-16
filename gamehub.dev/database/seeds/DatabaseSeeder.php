@@ -47,6 +47,38 @@ class DatabaseSeeder extends Seeder
             'picture'  => 'Far_Cry_3.jpg',
         ]);
 
+        DB::table('games')->insert([
+            'id'       => 6,
+            'name'     => 'Call of Duty: Modern Warfare 2',
+            'grade'    => 4,
+            'picture'  => 'Call_of_Duty_Modern_Warfare_2.jpg',
+        ]);
+
+        DB::table('games')->insert([
+            'id'       => 7,
+            'name'     => 'The Elder Scrolls V: Skyrim',
+            'grade'    => 5,
+            'picture'  => 'The_Elder_Scrolls_V_Skyrim.jpg',
+        ]);
+
+        DB::table('games')->insert([
+            'id'       => 8,
+            'name'     => 'Just Cause 3',
+            'grade'    => 4,
+            'picture'  => 'Just_Cause_3.jpg',
+        ]);
+
+        DB::table('games')->insert([
+            'id'       => 9,
+            'name'     => 'The Witcher 3: Wild Hunt',
+            'grade'    => 5,
+            'picture'  => 'The_Witcher_3_Wild_Hunt.jpg',
+        ]);
+
+        
+
+
+
         
 
 
@@ -68,8 +100,8 @@ class DatabaseSeeder extends Seeder
         DB::table('games_user')->insert([
           'games_id' => 2,
           'user_id'  => 2,
-          'grade'    => 4,
-          'played'   => 1,
+          'grade'    => 0,
+          'played'   => 0,
         ]);
 
         DB::table('games_user')->insert([

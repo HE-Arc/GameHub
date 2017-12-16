@@ -27,19 +27,16 @@
 				<div class="col-md-2">
 				<button type="button" class="btn btn-primary btn-lg" data-dismiss="modal">Close</button>
 				</div>
-				@if ($wishlist == true)
-				<div class="col-md-offset-2 col-md-4">
-					<a class="btn btn-primary btn-lg" href="">Add to wishlist</a>
-				</div>
-				<div class="col-md-4">
-				<a class="btn btn-primary btn-lg" href="">Add to playedlist</a>
-				</div>
-				@else
 				<div class="col-md-4 col-md-offset-6">
-				<a class="btn btn-primary btn-lg" href="">Add to playedlist</a>
-				</div>
-				@endif
 				
+				<form method="POST" action="{{ route('route.addtoplayedlist') }}" accept-charset="UTF-8">
+				    
+				    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+				    <input id="game_id" name="game_id" type="hidden" value="" />   
+				    <input id="grade" name="grade" type="hidden" value="1" />
+				    <input class="btn btn-primary btn-lg" type="submit" value="Add to playedlist" />   
+				</form>
+				</div>
 			</div>
   		</div>
     </div><!-- /.modal-content -->
@@ -47,9 +44,15 @@
 </div><!-- /.modal -->
 
 <script type="text/javascript">
-function setName(name)
+function setName(name, id)
 {
 	var element=document.getElementById("titlegame");
 	element.innerHTML=name;
+
+	element=document.getElementById("game_id");
+	
+	element.value=id;
+
+	
 }
 </script>
