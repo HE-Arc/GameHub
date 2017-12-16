@@ -1,6 +1,7 @@
 @extends('layouts.mainlayout')
 
 @section('content')
+
 	<?php 
 	if (Auth::check()) {
 		echo Form::open(array('action' => 'CommentsController@store','class'=>'form-group'));
@@ -25,8 +26,8 @@
 				</div>
 				<div class="panel-footer" id="<?php echo $comment['commentid']; ?>">
 					<span class="like"><?php echo  $comment['votes'] ;?></span>
-					<span class="glyphicon glyphicon-plus"></span>
-					<span class="glyphicon glyphicon-minus" ></span>
+					<span class="glyphicon glyphicon-plus <?php if($comment['voteStatus']=='1'){echo "uservoteplus";}else if ($comment['voteStatus']=='-1'){echo "uservoteminus";}?>"></span>
+					<span class="glyphicon glyphicon-minus <?php if($comment['voteStatus']=='1'){echo "uservoteplus";}else if ($comment['voteStatus']=='-1'){echo "uservoteminus";} ?>" ></span>
 				</div>
 			</div>
 		</div>
@@ -34,6 +35,7 @@
 	
 	
 </div>
+<div class="myAlert-bottom  alert alert-danger hide"></div>
 @endsection
 @section('scripts')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -42,38 +44,69 @@
 		$(".glyphicon.glyphicon-plus, .glyphicon.glyphicon-minus").click(function(){
 			let user_note=0;
 			let comment_div_id = $(event.target).closest('div').attr('id');
-			if($(event.target).attr('class')=='glyphicon glyphicon-plus'){
+			let target = $(event.target);
+			if(target.hasClass('glyphicon glyphicon-plus')){
 				user_note=1;
-			}else if($(event.target).attr('class')=='glyphicon glyphicon-minus'){
+			}else if(target.hasClass('glyphicon glyphicon-minus')){
 				user_note=-1;
 			}
-			var data = {note: user_note, comment_id:comment_div_id};
+			var data = {note: user_note};
 			$.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
 			$.ajax({
-                type: "POST",
-                url: "/comments/vote",
+                type: "GET",
+                url: "/comments/vote/"+comment_div_id,
                 dataType: 'JSON',
                 data: data, 
                 success: function(data) {
-                	span = $("#"+comment_div_id).children(".like");
-                	span.text(parseInt(span.html(), 10) + user_note);
-                	span.removeClass("like");
-                	span.addClass("zoomIn animated");
-            		setTimeout(function(){
-  						span.removeClass("zoomIn animated");
-  						span.addClass("like");
-					}, 500);
-            		
+                	if(target.hasClass('glyphicon-plus') && target.hasClass('uservoteplus')){
+                		user_note = 0;
+                	}else if (target.hasClass('glyphicon-minus') && target.hasClass('uservoteminus')){
+                		user_note = 0;
+                	}else if (target.hasClass('glyphicon-plus') && target.hasClass('uservoteminus')){
+                		user_note = 2;
+                		$("#"+comment_div_id).children(".glyphicon").removeClass('uservoteminus');
+                		$("#"+comment_div_id).children(".glyphicon").addClass('uservoteplus');
+                	}else if (target.hasClass('glyphicon-minus') && target.hasClass('uservoteplus')){
+                		user_note = -2;
+                		$("#"+comment_div_id).children(".glyphicon").removeClass('uservoteplus');
+                		$("#"+comment_div_id).children(".glyphicon").addClass('uservoteminus');
+                	}else if (target.hasClass('glyphicon-minus')){
+                		$("#"+comment_div_id).children(".glyphicon").addClass('uservoteminus');
+                	}else if (target.hasClass('glyphicon-plus')){
+                		$("#"+comment_div_id).children(".glyphicon").addClass('uservoteplus');
+                	}
+                	updateNbVote(comment_div_id,user_note);
        			},
-        		error: function() {
-           			alert('Error occured');
+        		error: function(data) {
+           			if(data['responseText']=='login'){
+           				$(".myAlert-bottom").text("you need to be logged in")
+           			}else{
+           				$(".myAlert-bottom").text("query error")
+           			}
+           			$(".myAlert-bottom").removeClass('hide');
+  						setTimeout(function(){
+   							 $(".myAlert-bottom").addClass('hide'); 
+  						}, 2000);
         		}
             });
 		})
 	})
+function updateNbVote(commentId, voteDiff) {
+	if(voteDiff != 0){
+    	span = $("#"+commentId).children(".like");
+    	span.text(parseInt(span.html(), 10) + voteDiff);
+    	span.removeClass("like");
+    	span.addClass("zoomIn animated");
+    	setTimeout(function(){
+  			span.removeClass("zoomIn animated");
+  			span.addClass("like");
+		}, 500);	
+    }
+}
+
 </script>
 @endsection

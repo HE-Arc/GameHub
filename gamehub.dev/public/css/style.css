@@ -215,3 +215,24 @@ span{
     text-decoration: underline;
     font-style: italic;
 }
+/*https://codepen.io/leenawat/pen/ORPbqE*/
+.myAlert-bottom{
+    position: fixed;
+    bottom: 5px;
+    left:75%;
+    width: 23%;
+}
+.uservoteplus.glyphicon-plus{
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    padding: 2px; 
+    background-color: rgba(0, 255, 0, 0.1) ;
+}
+.uservoteminus.glyphicon-minus{
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    padding: 2px; 
+    background-color: rgba(255, 0, 0, 0.1) ;
+}

@@ -103,11 +103,6 @@ class DatabaseSeeder extends Seeder
             'note'      => 1,
         ]);
 
-        DB::table('comment_votes')->insert([
-            'comment_id'=> 1,
-            'user_id'   => 1,
-            'note'      => 1,
-        ]);
 
         DB::table('comment_votes')->insert([
             'comment_id'=> 2,

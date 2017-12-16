@@ -14,13 +14,14 @@ class CreateCommentVotes extends Migration
     public function up()
     {
         Schema::create('comment_votes', function (Blueprint $table) {
-            $table->integer('comment_id')->unsigned()->index();
-            $table->integer('user_id')->unsigned()->index();
+            $table->integer('comment_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->integer('note');
         });
         Schema::table('comment_votes', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('comment_id')->references('id')->on('comments')->onDelete('cascade');
+            $table->primary(['comment_id', 'user_id']);
         });
     }
 
