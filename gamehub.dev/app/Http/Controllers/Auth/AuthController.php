@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\User;
 use App\Http\Controllers\Controller;
-use App\UsersSteam;
 use Invisnik\LaravelSteamAuth\SteamAuth;
+use Auth;
 
 class AuthController extends Controller
 {
-    /**
+  /**
      * The SteamAuth instance.
      *
      * @var SteamAuth
@@ -33,7 +34,7 @@ class AuthController extends Controller
     }
 
     /**
-     * Redirect the user to the authentication page.
+     * Redirect the user to the authentication page
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
@@ -43,7 +44,7 @@ class AuthController extends Controller
     }
 
     /**
-     * Get user info and log in.
+     * Get user info and log in
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
@@ -51,6 +52,7 @@ class AuthController extends Controller
     {
         if ($this->steam->validate()) {
             $info = $this->steam->getUserInfo();
+
             if (!is_null($info)) {
                 $user = $this->findOrNewUser($info);
 
@@ -59,29 +61,27 @@ class AuthController extends Controller
                 return redirect($this->redirectURL); // redirect to site
             }
         }
-
         return $this->redirectToSteam();
     }
 
     /**
-     * Getting user by info or created if not exists.
+     * Getting user by info or created if not exists
      *
      * @param $info
-     *
-     * @return UsersSteam
+     * @return User
      */
     protected function findOrNewUser($info)
     {
-        $user = UsersSteam::where('steamid', $info->steamID64)->first();
+        $user = User::where('steamid', $info->steamID64)->first();
 
         if (!is_null($user)) {
             return $user;
         }
 
-        return UsersSteam::create([
-            'username' => $info->personaname,
-            'avatar'   => $info->avatarfull,
-            'steamid'  => $info->steamID64,
+        return User::create([
+            'name' => $info->personaname,
+            'avatar' => $info->avatarfull,
+            'steamid' => $info->steamID64
         ]);
     }
 }

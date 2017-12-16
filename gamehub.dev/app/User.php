@@ -32,6 +32,7 @@ class User extends Authenticatable
         return $this->belongsToMany(Games::class)->withPivot('grade', 'played');
     }
 
+
     public function list($played)
     {
         $data=$this->belongsToMany(Games::class)->withPivot('grade', 'played')->get();
@@ -52,5 +53,13 @@ class User extends Authenticatable
              
         }
         return $games;
+    }
+
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
+    public function addComment($request){
+        $this->comments()->create($request);
+
     }
 }

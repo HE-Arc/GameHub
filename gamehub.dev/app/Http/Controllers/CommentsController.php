@@ -81,11 +81,8 @@ class CommentsController extends Controller
             'content' => 'required',
             'game_id' => 'filled',
         ]);
-        $comment = Comment::create(array_merge($request->all(), ['user_id' => Auth::id()]));
-
-        if ($comment) {
-            return ['status' => 'true', 'commentId' => $comment->id];
-        }
+        auth()->user()->addComment($request->all());
+        return redirect("/comments/".$request["game_id"]);
     }
 
     /**
@@ -120,13 +117,13 @@ class CommentsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Comment $comment, Request $request)
     {
         if (Auth::check()) {
             $comment = Comment::find($request->input('comment_id'));
             $comment->votes()->attach(Auth::id(), ['note' =>  $request->input('note')]);
 
-            return 'success';
+            return 'true';
         } else {
             return "You're not logged in";
         }

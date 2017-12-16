@@ -23,16 +23,13 @@
 					<h5 id="comment_title"><?php echo  $comment['title'];?></h5><br>
 					<?php echo  $comment['content'] ;?>
 				</div>
-				<div class="panel-footer">
-					<?php echo  $comment['votes'] ;?>
-					<span class="glyphicon glyphicon-plus" id="upvote"></span>
-					<span class="glyphicon glyphicon-minus" id="downvote"></span>
+				<div class="panel-footer" id="<?php echo $comment['commentid']; ?>">
+					<span class="like"><?php echo  $comment['votes'] ;?></span>
+					<span class="glyphicon glyphicon-plus"></span>
+					<span class="glyphicon glyphicon-minus" ></span>
 				</div>
 			</div>
 		</div>
-		<?php
-			/*echo " id du commentaire : ". $comment['commentid'] . "<br>";*/
-		?>
 	<?php endforeach ?>
 	
 	
@@ -42,8 +39,15 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$("#upvote").click(function(){
-			var data = {note: 1, comment_id:1};
+		$(".glyphicon.glyphicon-plus, .glyphicon.glyphicon-minus").click(function(){
+			let user_note=0;
+			let comment_div_id = $(event.target).closest('div').attr('id');
+			if($(event.target).attr('class')=='glyphicon glyphicon-plus'){
+				user_note=1;
+			}else if($(event.target).attr('class')=='glyphicon glyphicon-minus'){
+				user_note=-1;
+			}
+			var data = {note: user_note, comment_id:comment_div_id};
 			$.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -51,9 +55,23 @@
             });
 			$.ajax({
                 type: "POST",
-                url: "http://gamehub.dev/comments/1",
+                url: "/comments/vote",
                 dataType: 'JSON',
-                data: data,
+                data: data, 
+                success: function(data) {
+                	span = $("#"+comment_div_id).children(".like");
+                	span.text(parseInt(span.html(), 10) + user_note);
+                	span.removeClass("like");
+                	span.addClass("zoomIn animated");
+            		setTimeout(function(){
+  						span.removeClass("zoomIn animated");
+  						span.addClass("like");
+					}, 500);
+            		
+       			},
+        		error: function() {
+           			alert('Error occured');
+        		}
             });
 		})
 	})

@@ -16,7 +16,7 @@ class CreateCommentVotes extends Migration
         Schema::create('comment_votes', function (Blueprint $table) {
             $table->integer('comment_id')->unsigned()->index();
             $table->integer('user_id')->unsigned()->index();
-            $table->integer('note')->unsigned();
+            $table->integer('note');
         });
         Schema::table('comment_votes', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
