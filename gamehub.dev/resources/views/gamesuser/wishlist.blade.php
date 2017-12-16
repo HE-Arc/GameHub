@@ -2,10 +2,9 @@
 
 @section('content')
 
-<h1>Best rating games</h1>
+<h1>Wishlist</h1>
 
-@include('layouts.layouttiled', ['parameter' => ['toplayedlist','towishlist','star']])
+@include('layouts.layouttiled', ['parameter' => ['toplayedlist','delete']])
 @include('layouts.layoutaddgame',['wishlist' => true])
-
 
 @stop

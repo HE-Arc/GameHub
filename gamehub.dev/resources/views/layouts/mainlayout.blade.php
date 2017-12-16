@@ -56,13 +56,15 @@
         </div>
         <!-- Sidebar Links -->
         <ul class="list-unstyled components">
+        	<li><a href="{{ secure_asset('/') }}">Mainpage</a></li>
             @guest
                 <li><a href="{{ route('login') }}">Login</a></li>
                 <li><a href="{{ route('register') }}">Register</a></li>
 								<li><a href="{{ route('auth.steam') }}">Steam</a></li>
             @else
-                <li><a href=""></a></li>
-								<li><a href="{{ route('gamesuser.index') }}">My Games</a></li>
+				<li><a href="{{ route('route.wishlist') }}">Wishlist</a></li>
+				<li><a href="{{ route('route.playedlist') }}">Playedlist</a></li>
+
                 <li>
                     <a  href="{{ route('logout') }}"
                         onclick="event.preventDefault();
@@ -92,6 +94,7 @@
 	$(document).ready(function () {
                 $("#sidebar").mCustomScrollbar({
                     theme: "minimal"
+
                 });
 
                 $('#sidebarCollapse').on('click', function () {
@@ -99,6 +102,8 @@
                     $('.collapse.in').toggleClass('in');
                     $('a[aria-expanded=true]').attr('aria-expanded', 'false');
                 });
+
+                $('#sidebar').toggleClass('active');
             });
 
 </script>

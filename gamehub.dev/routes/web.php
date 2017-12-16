@@ -13,9 +13,14 @@
 
 Auth::routes();
 
+Route::get('/deletegame/{id}', 'GamesUserController@deleteGame')->name('route.deletegame');
+Route::get('/addtowishlist/{id}', 'GamesUserController@insertWish')->name('route.addtowishlist');
+Route::post('/addtoplayedlist', 'GamesUserController@insertPlayed')->name('route.addtoplayedlist');
 Route::get('/infogame/{steam_id}', 'GameInfoControler@index')->name('route.infogame');
-Route::get('/', 'StartPageControler@index');
+Route::get('/', 'StartPageControler@index')->name('route.startpage');
 
+Route::get('/wishlist', 'GamesUserController@getWishList')->name('route.wishlist');
+Route::get('/playedlist', 'GamesUserController@getPlayedList')->name('route.playedlist');
 Route::get('/gamesuser', 'GamesUserController@index');
 Route::resource('gamesuser', 'GamesUserController');
 
