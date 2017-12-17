@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Games;
 use App\Comment;
+use App\Games;
 use App\User;
 use Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 /* part of the code inspired from : https://www.cloudways.com/blog/comment-system-laravel-vuejs/ */
 class CommentsController extends Controller
@@ -51,6 +50,7 @@ class CommentsController extends Controller
         }
         $collection = collect($commentsData);
         $sortedComments = $collection->sortByDesc('votes');
+
         return view('comments.comment', ['comments' => $sortedComments, 'game'=>$game]);
     }
 
@@ -79,7 +79,8 @@ class CommentsController extends Controller
             'game_id' => 'filled',
         ]);
         auth()->user()->comments()->create($request->all());
-        return redirect("/game/".$request["game_id"]);
+
+        return redirect('/game/'.$request['game_id']);
     }
 
     /**
@@ -118,14 +119,15 @@ class CommentsController extends Controller
     {
         if (Auth::check()) {
             $elem = $comment->votes()->where('user_id', Auth::id())->first();
-            if($elem){
+            if ($elem) {
                 $comment->votes()->updateExistingPivot(Auth::id(), ['note' =>  $request->input('note')]);
-            }else{
+            } else {
                 $comment->votes()->attach(Auth::id(), ['note' =>  $request->input('note')]);
             }
+
             return 'true';
         } else {
-            return "login";
+            return 'login';
         }
     }
 
