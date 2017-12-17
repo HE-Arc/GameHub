@@ -13,6 +13,8 @@
 
 Auth::routes();
 
+Route::post('/search', 'GamesController@search')->name('route.search');
+
 Route::get('/deletegame/{id}', 'GamesUserController@deleteGame')->name('route.deletegame');
 Route::get('/addtowishlist/{id}', 'GamesUserController@insertWish')->name('route.addtowishlist');
 Route::post('/addtoplayedlist', 'GamesUserController@insertPlayed')->name('route.addtoplayedlist');
@@ -28,7 +30,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/addgame/{steam_id}', 'GamesUserController@insertGame')->name('addGame');
 
-Route::get('/game/{game}', 'CommentsController@index');
+Route::get('/game/{game}', 'CommentsController@index')->name('route.game');
 Route::post('/comments', 'CommentsController@store');
 Route::get('/comments/vote/{comment}', 'CommentsController@update');
 
