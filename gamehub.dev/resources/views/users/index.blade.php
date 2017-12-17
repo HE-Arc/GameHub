@@ -78,6 +78,7 @@
             @endguest
         </ul>
 	</nav>
+<div id="siteContent">
   <form>
     <div class="form-group row">
       <label for="staticName" class="col-sm-2 col-form-label">Name</label>
@@ -101,9 +102,10 @@
     <div class="col-sm-10">
       <td><a href="{{ url('edit') }}">Update</a></td>
     </div>
-  </div>
+  	</div>
   </div>
 </form>
+</div>
 
 
 <script src="{{ secure_asset('js/app.js') }}"></script>
