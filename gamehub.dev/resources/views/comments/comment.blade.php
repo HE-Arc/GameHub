@@ -1,11 +1,19 @@
 @extends('layouts.mainlayout')
 
 @section('content')
-
+	<img id="pocket" src="{{ secure_asset('img/pocket/'.$game->picture ) }}"/>
+	<p>
+		@for ($i=0; $i < $game->grade; $i++) 
+			<img src="{{ secure_asset('img/star.png') }}">
+		 @endfor
+	</p>
 	<?php 
+	echo $game->name;
+
+	echo $game->grade;
 	if (Auth::check()) {
-		echo Form::open(array('action' => 'CommentsController@store','class'=>'form-group'));
-		echo Form::hidden('game_id', $game_id);
+		echo Form::open(array('action' => 'CommentsController@store','class'=>'form-group comment-form'));
+		echo Form::hidden('game_id', $game->id);
 		echo Form::label('title', 'titre du commentaire',['class' => 'form-group']);
 		echo Form::text('title',null,['class' => 'form-control']);
 		echo Form::label('content', 'contenu',['class' => 'form-group']);

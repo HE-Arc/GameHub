@@ -28,9 +28,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/addgame/{steam_id}', 'GamesUserController@insertGame')->name('addGame');
 
-Route::get('comments/{steamId}', 'CommentsController@index');
-Route::post('comments', 'CommentsController@store');
-Route::get('comments/vote/{comment}', 'CommentsController@update');
+Route::get('/game/{game}', 'CommentsController@index');
+Route::post('/comments', 'CommentsController@store');
+Route::get('/comments/vote/{comment}', 'CommentsController@update');
 
 Route::get('auth/steam', 'Auth\AuthController@redirectToSteam')->name('auth.steam');
 Route::get('auth/steam/handle', 'Auth\AuthController@handle')->name('auth.steam.handle');

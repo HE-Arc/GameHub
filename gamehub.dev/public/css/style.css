@@ -9,8 +9,7 @@ body{
     margin-top:100px;
     margin-left: 40px;
 }
-
-.thumbnail #pocket{
+#pocket{
     height:300px;
     width:200px;
 }
