@@ -19,6 +19,13 @@ class GamesController extends Controller
         return view('games.index', ['games' => $games]);
     }
 
+    public function search()
+    {
+        $games = new Games;
+        $res=$games->search($_POST['name']);
+        echo $res['id'];
+    }
+
     /**
      * Show the form for creating a new resource.
      *

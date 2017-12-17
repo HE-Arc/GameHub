@@ -53,7 +53,9 @@ a, a:hover, a:focus {
     transition: all 0.3s;
 }
 
-
+.container{
+    width: 98%;
+}
 
 .navbar-btn {
     box-shadow: none;
@@ -213,8 +215,8 @@ span{
 }
 
 #sidebarCollapse{
-	background: var(--bg-title-color);
-}
+	margin-top: 0px;
+    }
 
 #comment_title{
     font-weight: bold;
