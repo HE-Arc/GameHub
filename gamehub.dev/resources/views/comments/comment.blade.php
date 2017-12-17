@@ -1,32 +1,36 @@
 @extends('layouts.mainlayout')
 
 @section('content')
-	<img id="pocket" src="{{ secure_asset('img/pocket/'.$game->picture ) }}"/>
-	<p>
-		@for ($i=0; $i < $game->grade; $i++) 
-			<img src="{{ secure_asset('img/star.png') }}">
-		 @endfor
-	</p>
-	<?php 
-	echo $game->name;
 
-	echo $game->grade;
+		<h1 id="gameTitle">
+			{{$game->name}}
+		</h1>
+		<img id="pocket" class="center-block" src="{{ secure_asset('img/pocket/'.$game->picture ) }}"/>
+		<br>
+		<p class="text-center">
+			@for ($i=0; $i < $game->grade; $i++) 
+				<img src="{{ secure_asset('img/star.png') }}">
+			@endfor
+		</p>
+	<h3>Comments</h3>
+	<?php 
 	if (Auth::check()) {
-		echo Form::open(array('action' => 'CommentsController@store','class'=>'form-group comment-form'));
+		echo Form::open(array('action' => 'CommentsController@store','class'=>'form-group'));
 		echo Form::hidden('game_id', $game->id);
-		echo Form::label('title', 'titre du commentaire',['class' => 'form-group']);
-		echo Form::text('title',null,['class' => 'form-control']);
-		echo Form::label('content', 'contenu',['class' => 'form-group']);
-		echo Form::textarea('content',null,['class' => 'form-control']);
-		echo Form::submit('Poster !',['class' => 'btn']);
+		echo Form::label('title', 'Title',['class' => 'form-group']);
+		echo Form::text('title',null,['class' => 'form-control','placeholder'=>'Chose a title for your comment ... ']);
+		echo Form::label('content', 'Comment',['class' => 'form-group']);
+		echo Form::textarea('content',null,['class' => 'form-control','placeholder'=>'Write your comment here ... ']);
+		echo Form::submit('Submit !',['class' => 'btn']);
 		echo Form::close();
 	}
 	?>
+	<br>
 	<?php foreach ($comments as $comment):?>
 		<div class="col-sm-7">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<strong><?php echo  $comment['name'] ;?></strong> <span class="text-muted">a commenté le <?php echo  $comment['date'] ;?> à <?php echo  $comment['hour']; ?></span>
+					<strong><?php echo  $comment['name'] ;?></strong> <span class="text-muted">commented on <?php echo  $comment['date'] ;?> at <?php echo  $comment['hour']; ?></span>
 				</div>
 				<div class="panel-body" >
 					<h5 id="comment_title"><?php echo  $comment['title'];?></h5><br>

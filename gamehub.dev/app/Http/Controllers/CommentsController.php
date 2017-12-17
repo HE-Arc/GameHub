@@ -7,6 +7,7 @@ use App\Comment;
 use App\User;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 /* part of the code inspired from : https://www.cloudways.com/blog/comment-system-laravel-vuejs/ */
 class CommentsController extends Controller
