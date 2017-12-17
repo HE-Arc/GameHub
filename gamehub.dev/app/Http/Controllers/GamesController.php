@@ -21,15 +21,12 @@ class GamesController extends Controller
 
     public function search()
     {
-        $games = new Games;
-        $res=$games->search($_POST['name']);
+        $games = new Games();
+        $res = $games->search($_POST['name']);
 
-        if($res)
-        {
-            return \Redirect::route('route.game',$res->id);
-        }
-        else
-        {
+        if ($res) {
+            return \Redirect::route('route.game', $res->id);
+        } else {
             return view('gamenotfound');
         }
     }

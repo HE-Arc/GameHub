@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateUserSteamsTable extends Migration
 {
@@ -14,11 +14,11 @@ class CreateUserSteamsTable extends Migration
     public function up()
     {
         Schema::create('user_steams', function (Blueprint $table) {
-          $table->increments('steamid');
-          $table->string('username');
-          $table->string('avatar');
-          $table->rememberToken();
-          $table->timestamps();
+            $table->increments('steamid');
+            $table->string('username');
+            $table->string('avatar');
+            $table->rememberToken();
+            $table->timestamps();
         });
     }
 
