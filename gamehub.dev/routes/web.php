@@ -13,6 +13,10 @@
 
 Auth::routes();
 
+Route::get('/index', 'UserController@index')->name('route.index');
+Route::get('/edit', 'UserController@edit')->name('route.edit');
+Route::post('/update', 'UserController@update')->name('route.update');
+
 Route::get('/deletegame/{id}', 'GamesUserController@deleteGame')->name('route.deletegame');
 Route::get('/addtowishlist/{id}', 'GamesUserController@insertWish')->name('route.addtowishlist');
 Route::post('/addtoplayedlist', 'GamesUserController@insertPlayed')->name('route.addtoplayedlist');

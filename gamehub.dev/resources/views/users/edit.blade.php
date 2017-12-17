@@ -80,11 +80,44 @@
             @endguest
         </ul>
 	</nav>
-	<div id="siteContent">
-		@yield('content')
-		@yield('scripts')
-	</div>
 </div>
+
+<div class="row">
+    <div class="col-lg-12 margin-tb">
+        <div class="pull-left">
+            <h2>Edit User</h2>
+        </div>
+        <div class="pull-right">
+            <a class="btn btn-primary" href="{{ route('route.index') }}"> Back</a>
+        </div>
+    </div>
+</div>
+
+{!! Form::model($user, ['method' => 'POST','route' => ['route.update']]) !!}
+  <div class="row">
+    <div class="col-sm-10">
+			<div class"form-group">
+				<strong>Name :</strong>
+				{!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
+			</div>
+		</div>
+    <div class="col-sm-10">
+			<div class"form-group">
+				<strong>Email :</strong>
+				{!! Form::email('email', null, array('placeholder' => 'Email','class' => 'form-control')) !!}
+  		</div>
+		</div>
+    <div class="col-sm-10">
+			<div class"form-group">
+				<strong>Password :</strong>
+				{!! Form::password('password', null, array('placeholder' => 'Password','class' => 'form-control')) !!}
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-12 text-center">
+					<button type="submit" class="btn btn-primary">Submit</button>
+		</div>
+	</div>
+{!! Form::close() !!}
 
 
 <script src="{{ secure_asset('js/app.js') }}"></script>
@@ -108,8 +141,5 @@
             });
 
 </script>
-
-
-
 </body>
 </html>

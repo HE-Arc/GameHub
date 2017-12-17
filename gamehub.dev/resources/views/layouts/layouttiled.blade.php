@@ -1,5 +1,5 @@
 <div class="col-md-12 col-centered">
-    @foreach ($games as $game)        
+    @foreach ($games as $game)
 		<div class="col-md-3">
 			<div class="thumbnail col-md-12">
 				<div id="stars" class="starrr"></div>
@@ -8,7 +8,7 @@
 				  <p>{{ $game->name }} </p>
 				  <p>
 				  @if (in_array('star',$parameter))
-					  @for ($i=0; $i < $game->grade; $i++) 
+					  @for ($i=0; $i < $game->grade; $i++)
 					  	<img src="{{ secure_asset('img/star.png') }}">
 					  @endfor
 				  @endif
@@ -31,4 +31,3 @@
 		</div>
 	@endforeach
 </div>
-
