@@ -8,29 +8,30 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-  public function index()
-  {
-    $user = Auth::user();
-    return view('users.index', ['user' => $user]);
-  }
+    public function index()
+    {
+        $user = Auth::user();
 
-  public function edit(User $user)
-  {
-    return view('users.edit',compact('user'));
-  }
+        return view('users.index', ['user' => $user]);
+    }
 
-  public function update(Request $request)
-   {
-     $user = Auth::user();
+    public function edit(User $user)
+    {
+        return view('users.edit', compact('user'));
+    }
 
-     $user->name = $request->get('name');
+    public function update(Request $request)
+    {
+        $user = Auth::user();
 
-     $user->email = $request->get('email');
+        $user->name = $request->get('name');
 
-     $user->password = $request->get('password');
+        $user->email = $request->get('email');
 
-     $user->save();
+        $user->password = $request->get('password');
 
-     return redirect()->route('route.index')->with('success','User updated successfully');
-   }
+        $user->save();
+
+        return redirect()->route('route.index')->with('success', 'User updated successfully');
+    }
 }

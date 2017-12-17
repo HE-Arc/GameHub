@@ -6,18 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class GamesUser extends Model
 {
-	public $table = "games_user";
-	public $timestamps = false;
+    public $table = 'games_user';
+    public $timestamps = false;
 
-     public function average($game_id)
+    public function average($game_id)
     {
-    	$average=$this->where('games_id', $game_id)->where('played',1)->avg('grade');
-        return round($average);    
+        $average = $this->where('games_id', $game_id)->where('played', 1)->avg('grade');
+
+        return round($average);
     }
 
-    public function insertGamePlayed($game_id,$user_id,$grade)
+    public function insertGamePlayed($game_id, $user_id, $grade)
     {
-    	$this->insert([
+        $this->insert([
                   'games_id' => $game_id,
                   'user_id'  => $user_id,
                   'grade'    => $grade,
@@ -25,9 +26,9 @@ class GamesUser extends Model
                 ]);
     }
 
-    public function insertGameWished($game_id,$user_id)
+    public function insertGameWished($game_id, $user_id)
     {
-    	$this->insert([
+        $this->insert([
                   'games_id' => $game_id,
                   'user_id'  => $user_id,
                   'grade'    => 0,
@@ -35,15 +36,13 @@ class GamesUser extends Model
                 ]);
     }
 
-    public function updateGamePlayed($game_id,$user_id,$grade)
+    public function updateGamePlayed($game_id, $user_id, $grade)
     {
-    	$this->where('games_id', $game_id)->where('user_id',$user_id)->update(['grade' => $grade,'played' => 1]);
+        $this->where('games_id', $game_id)->where('user_id', $user_id)->update(['grade' => $grade, 'played' => 1]);
     }
 
-    public function deleteGame($game_id,$user_id)
+    public function deleteGame($game_id, $user_id)
     {
-    	$this->where('games_id', $game_id)->where('user_id', $user_id)->delete();
+        $this->where('games_id', $game_id)->where('user_id', $user_id)->delete();
     }
-
-
 }

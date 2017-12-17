@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\GamesUser;
 use App\Games;
+use App\GamesUser;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class GamesUserController extends Controller
 {
@@ -38,60 +37,50 @@ class GamesUserController extends Controller
 
     public function insertWish($id)
     {
-        $game_user = new GamesUser;
-        $res= auth()->user()->games()->where('games_id',$id)->first();
-        if($res)
-        {
+        $game_user = new GamesUser();
+        $res = auth()->user()->games()->where('games_id', $id)->first();
+        if ($res) {
+        } else {
+            $userid = auth()->user()->id;
+            $game_user->insertGameWished($id, $userid);
+        }
 
-        }
-        else
-        {
-            $userid= auth()->user()->id;
-            $game_user->insertGameWished($id,$userid);
-        }
         return \Redirect::route('route.startpage');
     }
 
     public function insertPlayed()
     {
-        $game_user = new GamesUser;
-        $res= auth()->user()->games()->where('games_id',$_POST['game_id'])->first();
-        
-        $userid= auth()->user()->id;
-        if($res)
-        {
-            if($res->pivot->played==0)
-            {
-                $game_user->updateGamePlayed($_POST['game_id'],$userid,$_POST['grade']);
-            } 
+        $game_user = new GamesUser();
+        $res = auth()->user()->games()->where('games_id', $_POST['game_id'])->first();
+
+        $userid = auth()->user()->id;
+        if ($res) {
+            if ($res->pivot->played == 0) {
+                $game_user->updateGamePlayed($_POST['game_id'], $userid, $_POST['grade']);
+            }
+        } else {
+            $game_user->insertGamePlayed($_POST['game_id'], $userid, $_POST['grade']);
         }
-        else
-        {          
-            $game_user->insertGamePlayed($_POST['game_id'],$userid,$_POST['grade']);
-        }   
 
-        $average=$game_user->average( $_POST['game_id']);
-        $games = new Games;
-        $games->setAvg( $_POST['game_id'],$average);
+        $average = $game_user->average($_POST['game_id']);
+        $games = new Games();
+        $games->setAvg($_POST['game_id'], $average);
 
-        
-       return \Redirect::route('route.startpage');      
+        return \Redirect::route('route.startpage');
     }
 
     public function deleteGame($id)
     {
-        $userid= auth()->user()->id;
-        $game_user = new GamesUser;
-        $game_user->deleteGame($id,$userid);
+        $userid = auth()->user()->id;
+        $game_user = new GamesUser();
+        $game_user->deleteGame($id, $userid);
 
-        $average=$game_user->average( $id);
-        $games = new Games;
-        $games->setAvg( $id,$average);
+        $average = $game_user->average($id);
+        $games = new Games();
+        $games->setAvg($id, $average);
 
-        
         return \Redirect::route('route.startpage');
     }
-
 
     /**
      * Show the form for creating a new resource.

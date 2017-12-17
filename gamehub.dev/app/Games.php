@@ -16,17 +16,16 @@ class Games extends Model
 
     public function bestGrades()
     {
-    	return $this->all()->sortBy("grade");
+        return $this->all()->sortBy('grade');
     }
 
-    public function setAvg($game_id,$avg)
+    public function setAvg($game_id, $avg)
     {
         $this->where('id', $game_id)->update(['grade' => $avg]);
     }
 
     public function search($name)
     {
-        return $this->where('name','LIKE',"%{$name}%")->get()->first();
-        
+        return $this->where('name', 'LIKE', "%{$name}%")->get()->first();
     }
 }
