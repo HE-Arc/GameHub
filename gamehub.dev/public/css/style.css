@@ -9,8 +9,7 @@ body{
     margin-top:100px;
     margin-left: 40px;
 }
-
-.thumbnail #pocket{
+#pocket{
     height:300px;
     width:200px;
 }
@@ -243,4 +242,14 @@ span{
     border-radius: 5px;
     padding: 2px; 
     background-color: rgba(255, 0, 0, 0.1) ;
+}
+#gameInfo{
+    margin-left: auto;
+    margin-right: auto;
+}
+.form-control{
+    margin-bottom: 10px;
+}
+#gameTitle{
+    font-size: 350%;
 }
