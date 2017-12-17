@@ -176,7 +176,7 @@ span{
     top: 60px;
     right: 0;
 }
-#content.active {
+#siteContent {
     width: 100%;
 }
 
@@ -191,10 +191,10 @@ span{
     #sidebar.active {
         margin-left: 0;
     }
-    #content {
+    #siteContent {
         width: 100%;
     }
-    #content.active {
+    #siteContent.active {
         width: calc(100% - 250px);
     }
     #sidebarCollapse span {

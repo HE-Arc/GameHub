@@ -15,63 +15,63 @@ class DatabaseSeeder extends Seeder
         DB::table('games')->insert([
             'id'       => 1,
             'name'     => "Assassin's Creed III",
-            'grade'    => 3,
+            'grade'    => 0,
             'picture'  => 'Assassin_s_Creed_III.jpg',
         ]);
 
         DB::table('games')->insert([
             'id'       => 2,
             'name'     => 'Battlefield 4',
-            'grade'    => 4,
+            'grade'    => 0,
             'picture'  => 'battlefield-4.jpg',
         ]);
 
         DB::table('games')->insert([
             'id'       => 3,
             'name'     => 'Kerbal Space Program',
-            'grade'    => 5,
+            'grade'    => 0,
             'picture'  => 'Kerbal_Space_Program.jpg',
         ]);
 
         DB::table('games')->insert([
             'id'       => 4,
             'name'     => 'Wolfenstein: The New Order',
-            'grade'    => 5,
+            'grade'    => 0,
             'picture'  => 'Wolfenstein_The_New_Order.jpg',
         ]);
 
         DB::table('games')->insert([
             'id'       => 5,
             'name'     => 'Far Cry 3',
-            'grade'    => 4,
+            'grade'    => 0,
             'picture'  => 'Far_Cry_3.jpg',
         ]);
 
         DB::table('games')->insert([
             'id'       => 6,
             'name'     => 'Call of Duty: Modern Warfare 2',
-            'grade'    => 4,
+            'grade'    => 0,
             'picture'  => 'Call_of_Duty_Modern_Warfare_2.jpg',
         ]);
 
         DB::table('games')->insert([
             'id'       => 7,
             'name'     => 'The Elder Scrolls V: Skyrim',
-            'grade'    => 5,
+            'grade'    => 0,
             'picture'  => 'The_Elder_Scrolls_V_Skyrim.jpg',
         ]);
 
         DB::table('games')->insert([
             'id'       => 8,
             'name'     => 'Just Cause 3',
-            'grade'    => 4,
+            'grade'    => 0,
             'picture'  => 'Just_Cause_3.jpg',
         ]);
 
         DB::table('games')->insert([
             'id'       => 9,
             'name'     => 'The Witcher 3: Wild Hunt',
-            'grade'    => 5,
+            'grade'    => 0,
             'picture'  => 'The_Witcher_3_Wild_Hunt.jpg',
         ]);
 

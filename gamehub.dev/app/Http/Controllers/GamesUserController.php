@@ -60,6 +60,7 @@ class GamesUserController extends Controller
     public function insertPlayed()
     {
         $res= auth()->user()->games()->where('games_id',$_POST['game_id'])->first();
+        
         $userid= auth()->user()->id;
         if($res)
         {
@@ -80,7 +81,13 @@ class GamesUserController extends Controller
 
 
         }
+
+        $average=DB::table('games_user')->where('games_id', $_POST['game_id'])->where('played',1)->avg('grade');
+        $average = round($average);
+        DB::table('games')->where('id', $_POST['game_id'])->update(['grade' => $average]);
+        
         return \Redirect::route('route.startpage');
+       
 
         
     }
@@ -89,6 +96,12 @@ class GamesUserController extends Controller
     {
         $userid= auth()->user()->id;
         DB::table('games_user')->where('games_id', $id)->where('user_id', $userid)->delete();
+
+        $average=DB::table('games_user')->where('games_id', $id)->where('played',1)->avg('grade');
+        $average = round($average);
+        DB::table('games')->where('id', $id)->update(['grade' => $average]);
+
+
         return \Redirect::route('route.startpage');
     }
 
