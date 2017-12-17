@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\GamesUser;
+use App\Games;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -37,6 +38,7 @@ class GamesUserController extends Controller
 
     public function insertWish($id)
     {
+        $game_user = new GamesUser;
         $res= auth()->user()->games()->where('games_id',$id)->first();
         if($res)
         {
@@ -45,20 +47,14 @@ class GamesUserController extends Controller
         else
         {
             $userid= auth()->user()->id;
-            DB::table('games_user')->insert([
-                  'games_id' => $id,
-                  'user_id'  => $userid,
-                  'grade'    => 0,
-                  'played'   => 0,
-                ]);
-
-
+            $game_user->insertGameWished($id,$userid);
         }
         return \Redirect::route('route.startpage');
     }
 
     public function insertPlayed()
     {
+        $game_user = new GamesUser;
         $res= auth()->user()->games()->where('games_id',$_POST['game_id'])->first();
         
         $userid= auth()->user()->id;
@@ -66,45 +62,35 @@ class GamesUserController extends Controller
         {
             if($res->pivot->played==0)
             {
-                DB::table('games_user')->where('games_id', $_POST['game_id'])->where('user_id',$userid)->update(['grade' => $_POST['grade'],'played' => 1]);
+                $game_user->updateGamePlayed($_POST['game_id'],$userid,$_POST['grade']);
             } 
         }
         else
-        {
-            
-            DB::table('games_user')->insert([
-                  'games_id' => $_POST['game_id'],
-                  'user_id'  => $userid,
-                  'grade'    => $_POST['grade'],
-                  'played'   => 1,
-                ]);
+        {          
+            $game_user->insertGamePlayed($_POST['game_id'],$userid,$_POST['grade']);
+        }   
 
-
-        }
-
-        $average=DB::table('games_user')->where('games_id', $_POST['game_id'])->where('played',1)->avg('grade');
-        $average = round($average);
-        DB::table('games')->where('id', $_POST['game_id'])->update(['grade' => $average]);
-        
-        return \Redirect::route('route.startpage');
-       
+        $average=$game_user->average( $_POST['game_id']);
+        $games = new Games;
+        $games->setAvg( $_POST['game_id'],$average);
 
         
+       return \Redirect::route('route.startpage');      
     }
 
     public function deleteGame($id)
     {
         $userid= auth()->user()->id;
-        DB::table('games_user')->where('games_id', $id)->where('user_id', $userid)->delete();
+        $game_user = new GamesUser;
+        $game_user->deleteGame($id,$userid);
 
-        $average=DB::table('games_user')->where('games_id', $id)->where('played',1)->avg('grade');
-        $average = round($average);
-        DB::table('games')->where('id', $id)->update(['grade' => $average]);
+        $average=$game_user->average( $id);
+        $games = new Games;
+        $games->setAvg( $id,$average);
 
-
+        
         return \Redirect::route('route.startpage');
     }
-
 
 
     /**

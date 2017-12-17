@@ -12,10 +12,10 @@
 */
 
 Auth::routes();
-
 Route::get('/index', 'UserController@index')->name('route.index');
 Route::get('/edit', 'UserController@edit')->name('route.edit');
 Route::post('/update', 'UserController@update')->name('route.update');
+Route::post('/search', 'GamesController@search')->name('route.search');
 
 Route::get('/deletegame/{id}', 'GamesUserController@deleteGame')->name('route.deletegame');
 Route::get('/addtowishlist/{id}', 'GamesUserController@insertWish')->name('route.addtowishlist');
@@ -32,9 +32,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/addgame/{steam_id}', 'GamesUserController@insertGame')->name('addGame');
 
-Route::get('comments/{steamId}', 'CommentsController@index');
-Route::post('comments', 'CommentsController@store');
-Route::get('comments/vote/{comment}', 'CommentsController@update');
+Route::get('/game/{game}', 'CommentsController@index')->name('route.game');
+Route::post('/comments', 'CommentsController@store');
+Route::get('/comments/vote/{comment}', 'CommentsController@update');
 
 Route::get('auth/steam', 'Auth\AuthController@redirectToSteam')->name('auth.steam');
 Route::get('auth/steam/handle', 'Auth\AuthController@handle')->name('auth.steam.handle');

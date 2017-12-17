@@ -19,4 +19,14 @@ class Games extends Model
     	return $this->all()->sortBy("grade");
     }
 
+    public function setAvg($game_id,$avg)
+    {
+        $this->where('id', $game_id)->update(['grade' => $avg]);
+    }
+
+    public function search($name)
+    {
+        return $this->where('name','LIKE',"%{$name}%")->get()->first();
+        
+    }
 }

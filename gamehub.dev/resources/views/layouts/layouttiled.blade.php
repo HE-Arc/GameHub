@@ -13,7 +13,7 @@
 					  @endfor
 				  @endif
 				  </p>
-				  <p><a class="btn btn-primary btn-lg" href=  "{{ route('route.infogame', $game->id) }}"  id="info" >Info</a>
+				  <p><a class="btn btn-primary btn-lg" href=  "{{ route('route.game', $game->id) }}"  id="info" >Info</a>
 				  	@auth
 					  @if (in_array('toplayedlist',$parameter))
 					  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#windowadd" onclick=" setName(<?php echo "&quot;".$game->name."&quot; , ".$game->id ?>);">Playedlist</button>

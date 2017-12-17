@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Games;
 use App\Comment;
 use App\User;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 /* part of the code inspired from : https://www.cloudways.com/blog/comment-system-laravel-vuejs/ */
 class CommentsController extends Controller
@@ -15,9 +17,9 @@ class CommentsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($gameId)
+    public function index(Games $game)
     {
-        $comments = Comment::with('votes')->where('game_id', $gameId)->get();
+        $comments = Comment::with('votes')->where('game_id', $game->id)->get();
 
         $commentsData = [];
         foreach ($comments as $key) {
@@ -49,7 +51,7 @@ class CommentsController extends Controller
         }
         $collection = collect($commentsData);
         $sortedComments = $collection->sortByDesc('votes');
-        return view('comments.comment', ['comments' => $sortedComments, 'game_id'=>$gameId]);
+        return view('comments.comment', ['comments' => $sortedComments, 'game'=>$game]);
     }
 
     /**
@@ -77,7 +79,7 @@ class CommentsController extends Controller
             'game_id' => 'filled',
         ]);
         auth()->user()->comments()->create($request->all());
-        return redirect("/comments/".$request["game_id"]);
+        return redirect("/game/".$request["game_id"]);
     }
 
     /**
