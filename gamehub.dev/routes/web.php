@@ -30,7 +30,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/addgame/{steam_id}', 'GamesUserController@insertGame')->name('addGame');
 
-Route::get('/game/{game}', 'CommentsController@index');
+Route::get('/game/{game}', 'CommentsController@index')->name('route.game');
 Route::post('/comments', 'CommentsController@store');
 Route::get('/comments/vote/{comment}', 'CommentsController@update');
 
