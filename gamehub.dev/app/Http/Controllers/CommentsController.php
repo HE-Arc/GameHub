@@ -21,9 +21,8 @@ class CommentsController extends Controller
 
         $commentsData = [];
         foreach ($comments as $key) {
-            $user = User::find($key->user_id);
+            $user = $key->user;
             $name = $user->name;
-            //maybe later : $photo = $user->first()->photo_url;
             $userVote = 0;
             $vote = 0;
             $voteStatus = 0;
@@ -31,29 +30,25 @@ class CommentsController extends Controller
             foreach ($key->votes as $note) {
                 $point = $point + $note->pivot->note;
             }
-            /*if (Auth::user()) {
-                $voteByUser = Comment::where('comment_id', $key->id)->where('user_id', Auth::user()->id)->first();
-                if ($voteByUser) {
-                    $userVote = 1;
-                    $voteStatus = $voteByUser->vote;
+            if (Auth::user()) {
+                $com = $key->votes()->where('user_id', Auth::id())->first();
+                if ($com) {
+                    $voteStatus = $com->pivot->note;
                 }
-            }*/
+            }
             array_push($commentsData, [
                    'name'           => $name,
                    'commentid'      => $key->id,
                    'title'          => $key->title,
                    'content'        => $key->content,
                    'votes'          => $point,
-                   //'votedByUser'    => $userVote,
-                   //'userVoteStatus' => $voteStatus,
+                   'voteStatus'     => $voteStatus,
                    'date'           => $key->created_at->format('d/m/Y'),
                    'hour'           => $key->created_at->format('H:i'),
                 ]);
         }
         $collection = collect($commentsData);
-
-        $sortedComments = $collection->sortBy('votes');
-
+        $sortedComments = $collection->sortByDesc('votes');
         return view('comments.comment', ['comments' => $sortedComments, 'game_id'=>$gameId]);
     }
 
@@ -81,7 +76,7 @@ class CommentsController extends Controller
             'content' => 'required',
             'game_id' => 'filled',
         ]);
-        auth()->user()->addComment($request->all());
+        auth()->user()->comments()->create($request->all());
         return redirect("/comments/".$request["game_id"]);
     }
 
@@ -120,12 +115,15 @@ class CommentsController extends Controller
     public function update(Comment $comment, Request $request)
     {
         if (Auth::check()) {
-            $comment = Comment::find($request->input('comment_id'));
-            $comment->votes()->attach(Auth::id(), ['note' =>  $request->input('note')]);
-
+            $elem = $comment->votes()->where('user_id', Auth::id())->first();
+            if($elem){
+                $comment->votes()->updateExistingPivot(Auth::id(), ['note' =>  $request->input('note')]);
+            }else{
+                $comment->votes()->attach(Auth::id(), ['note' =>  $request->input('note')]);
+            }
             return 'true';
         } else {
-            return "You're not logged in";
+            return "login";
         }
     }
 
