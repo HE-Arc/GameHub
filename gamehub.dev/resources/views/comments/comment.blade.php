@@ -8,12 +8,12 @@
 		<img id="pocket" class="center-block" src="{{ secure_asset('img/pocket/'.$game->picture ) }}"/>
 		<br>
 		<p class="text-center">
-			@for ($i=0; $i < $game->grade; $i++) 
+			@for ($i=0; $i < $game->grade; $i++)
 				<img src="{{ secure_asset('img/star.png') }}">
 			@endfor
 		</p>
 	<h3>Comments</h3>
-	<?php 
+	<?php
 	if (Auth::check()) {
 		echo Form::open(array('action' => 'CommentsController@store','class'=>'form-group'));
 		echo Form::hidden('game_id', $game->id);
@@ -30,11 +30,11 @@
 		<div class="col-sm-7">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<strong><?php echo  $comment['name'] ;?></strong> <span class="text-muted">commented on <?php echo  $comment['date'] ;?> at <?php echo  $comment['hour']; ?></span>
+					<strong><?php echo  htmlspecialchars($comment['name']) ;?></strong> <span class="text-muted">commented on <?php echo  $comment['date'] ;?> at <?php echo  $comment['hour']; ?></span>
 				</div>
 				<div class="panel-body" >
-					<h5 id="comment_title"><?php echo  $comment['title'];?></h5><br>
-					<?php echo  $comment['content'] ;?>
+					<h5 id="comment_title"><?php echo htmlspecialchars($comment['title']);?></h5><br>
+					<?php echo  htmlspecialchars($comment['content']) ;?>
 				</div>
 				<div class="panel-footer" id="<?php echo $comment['commentid']; ?>">
 					<span class="like"><?php echo  $comment['votes'] ;?></span>
@@ -44,8 +44,8 @@
 			</div>
 		</div>
 	<?php endforeach ?>
-	
-	
+
+
 </div>
 <div class="myAlert-bottom  alert alert-danger hide"></div>
 @endsection
@@ -72,7 +72,7 @@
                 type: "GET",
                 url: "/comments/vote/"+comment_div_id,
                 dataType: 'JSON',
-                data: data, 
+                data: data,
                 success: function(data) {
                 	if(target.hasClass('glyphicon-plus') && target.hasClass('uservoteplus')){
                 		user_note = 0;
@@ -101,7 +101,7 @@
            			}
            			$(".myAlert-bottom").removeClass('hide');
   						setTimeout(function(){
-   							 $(".myAlert-bottom").addClass('hide'); 
+   							 $(".myAlert-bottom").addClass('hide');
   						}, 2000);
         		}
             });
@@ -116,7 +116,7 @@ function updateNbVote(commentId, voteDiff) {
     	setTimeout(function(){
   			span.removeClass("zoomIn animated");
   			span.addClass("like");
-		}, 500);	
+		}, 500);
     }
 }
 

@@ -1,25 +1,16 @@
+
 @servers(['web' => '-A -p 2204 -l poweruser gamehub.srvz-webapp.he-arc.ch'])
 
-
-# pull
-@task('pull')
-  cd www/GameHub/gamehub.dev
+# pull and migrate
+@task('pull-migrate')
+  cd www/GameHub
   git pull
+  cd gamehub.dev
+  php artisan migrate:fresh --seed
+  echo "Deployment finished successfully!"
 @endtask
 
-# migrate
-@task('migrate')
-  cd www/GameHub/gamehub.dev
-  php artisan migrate --force
-@endtask
-
-# Just a done message :)
-@task('done')
-	echo "Deployment finished successfully!"
-@endtask
-
-# Run all tasks
+# Run task
 @macro('deploy')
-	pull
-	done
+	pull-migrate
 @endmacro
